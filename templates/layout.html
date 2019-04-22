@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>航线筛选后台</title>
@@ -10,18 +11,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     {% include 'includes/_navbar.html' %}
     <div class="container">
-      {% include 'includes/_messages.html' %}
-      {% block body %}{% endblock %}
+        {% include 'includes/_messages.html' %} {% block body %}{% endblock %}
     </div>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
     <script type="text/javascript">
-      CKEDITOR.replace('editor')
+        CKEDITOR.replace('editor')
     </script>
-  </body>
+</body>
+
 </html>

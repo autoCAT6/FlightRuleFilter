@@ -6,18 +6,20 @@ from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
+import requests
 
 app = Flask(__name__)
 
-# Config MySQL
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '123456'
-app.config['MYSQL_DB'] = 'myflaskapp'
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-# init MYSQL
+# # Config MySQL
+# app.config['MYSQL_HOST'] = 'localhost'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = '123456'
+# app.config['MYSQL_DB'] = 'myflaskapp'
+# app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+# # init MYSQL
 mysql = MySQL(app)
 
+app.config.from_pyfile('config.py')
 #Articles = Articles()
 
 # Index
@@ -33,23 +35,23 @@ def about():
 
 
 # Articles
-@app.route('/articles')
-def articles():
-    # Create cursor
-    cur = mysql.connection.cursor()
+# @app.route('/articles')
+# def articles():
+#     # Create cursor
+#     cur = mysql.connection.cursor()
 
-    # Get articles
-    result = cur.execute("SELECT * FROM articles")
+#     # Get articles
+#     result = cur.execute("SELECT * FROM articles")
 
-    articles = cur.fetchall()
+#     articles = cur.fetchall()
 
-    if result > 0:
-        return render_template('articles.html', articles=articles)
-    else:
-        msg = 'No Articles Found'
-        return render_template('articles.html', msg=msg)
-    # Close connection
-    cur.close()
+#     if result > 0:
+#         return render_template('articles.html', articles=articles)
+#     else:
+#         msg = 'No Articles Found'
+#         return render_template('articles.html', msg=msg)
+#     # Close connection
+#     cur.close()
 
 
 # Single Article
@@ -196,8 +198,14 @@ def dashboard():
     # Close connection
     # cur.close()
 
-    # Dashboard不用显示任何东西，只需提供CRUD
-    return render_template('dashboard.html')
+    # Dashboard 默认显示所有筛选规则，只需提供 UPDATE/DELETE 接口
+
+    # Get rules
+    payload = {'Accept': '*/*'}
+    response = requests.get(app.config['ENDPOINT']+app.config['GET_ALL_URL'], params=payload)
+    rules = response.json() # list of records
+    
+    return render_template('dashboard.html', rules=rules)
 
 # Article Form Class
 class ArticleForm(Form):
