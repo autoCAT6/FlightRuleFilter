@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
 #from data import Articles
 from flask_mysqldb import MySQL
@@ -50,7 +52,7 @@ def articles():
     cur.close()
 
 
-#Single Article
+# Single Article
 @app.route('/article/<string:id>/')
 def article(id):
     # Create cursor
@@ -113,32 +115,43 @@ def login():
         password_candidate = request.form['password']
 
         # Create cursor
-        cur = mysql.connection.cursor()
+        # cur = mysql.connection.cursor()
 
+        # 第一步不用连接数据库验证
         # Get user by username
-        result = cur.execute("SELECT * FROM users WHERE username = %s", [username])
+        # result = cur.execute("SELECT * FROM users WHERE username = %s", [username])
 
-        if result > 0:
-            # Get stored hash
-            data = cur.fetchone()
-            password = data['password']
+        # if result > 0:
+        #     # Get stored hash
+        #     data = cur.fetchone()
+        #     password = data['password']
 
-            # Compare Passwords
-            if sha256_crypt.verify(password_candidate, password):
-                # Passed
-                session['logged_in'] = True
-                session['username'] = username
+        #     # Compare Passwords
+        #     if sha256_crypt.verify(password_candidate, password):
+        #         # Passed
+        #         session['logged_in'] = True
+        #         session['username'] = username
 
-                flash('You are now logged in', 'success')
-                return redirect(url_for('dashboard'))
-            else:
-                error = 'Invalid login'
-                return render_template('login.html', error=error)
-            # Close connection
-            cur.close()
+        #         flash('You are now logged in', 'success')
+        #         return redirect(url_for('dashboard'))
+        #     else:
+        #         error = 'Invalid login'
+        #         return render_template('login.html', error=error)
+        #     # Close connection
+        #     cur.close()
+        # else:
+        #     error = 'Username not found'
+        #     return render_template('login.html', error=error)
+        
+        if username == 'admin' and password_candidate == 'admin':
+            session['logged_in'] = True
+            session['username'] = username
+            flash('You are now logged in', 'success')
+            return redirect(url_for('dashboard'))
         else:
             error = 'Username not found'
             return render_template('login.html', error=error)
+
 
     return render_template('login.html')
 
@@ -166,32 +179,35 @@ def logout():
 @is_logged_in
 def dashboard():
     # Create cursor
-    cur = mysql.connection.cursor()
+    # cur = mysql.connection.cursor()
 
     # Get articles
     #result = cur.execute("SELECT * FROM articles")
     # Show articles only from the user logged in 
-    result = cur.execute("SELECT * FROM articles WHERE author = %s", [session['username']])
+    # result = cur.execute("SELECT * FROM articles WHERE author = %s", [session['username']])
 
-    articles = cur.fetchall()
+    # articles = cur.fetchall()
 
-    if result > 0:
-        return render_template('dashboard.html', articles=articles)
-    else:
-        msg = 'No Articles Found'
-        return render_template('dashboard.html', msg=msg)
+    # if result > 0:
+    #     return render_template('dashboard.html', articles=articles)
+    # else:
+    #     msg = 'No Articles Found'
+    #     return render_template('dashboard.html', msg=msg)
     # Close connection
-    cur.close()
+    # cur.close()
+
+    # Dashboard不用显示任何东西，只需提供CRUD
+    return render_template('dashboard.html')
 
 # Article Form Class
 class ArticleForm(Form):
     title = StringField('Title', [validators.Length(min=1, max=200)])
     body = TextAreaField('Body', [validators.Length(min=30)])
 
-# Add Article
-@app.route('/add_article', methods=['GET', 'POST'])
+# Add Rule
+@app.route('/add_rule', methods=['GET', 'POST'])
 @is_logged_in
-def add_article():
+def add_rule():
     form = ArticleForm(request.form)
     if request.method == 'POST' and form.validate():
         title = form.title.data
@@ -213,7 +229,7 @@ def add_article():
 
         return redirect(url_for('dashboard'))
 
-    return render_template('add_article.html', form=form)
+    return render_template('add_rule.html', form=form)
 
 
 # Edit Article
