@@ -5,3 +5,67 @@
 2019-04-24 14:19:16,522 - ERROR - app.py - to_int - 196 - invalid literal for int() with base 10: ''
 2019-04-24 14:26:32,396 - INFO - app.py - edit_rule - 229 - {"id": 1, "minRate": "0.0", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": "", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["DDD"], "prohibition": ["FFF"], "yesSpanCity": ["TRU"], "notSpanCity": ["ADF"], "maxStrideDays": 0, "banAllDays": 0, "banType": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "transferBlack": ["ING"], "legTransferBlack": ["string"]}
 2019-04-24 14:26:32,397 - INFO - app.py - edit_rule - 230 - 修改规则成功
+2019-04-24 14:46:20,153 - INFO - app.py - edit_rule - {"id": 1, "minRate": "0.0", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": "", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["DDD"], "prohibition": ["FFF"], "yesSpanCity": ["TRU"], "notSpanCity": ["ADF"], "maxStrideDays": 0, "banAllDays": 0, "banType": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "transferBlack": ["ING"], "legTransferBlack": ["string"]}
+2019-04-24 14:46:20,154 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-24 14:48:21,955 - INFO - app.py - edit_rule - {"id": 1, "minRate": "0.0", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": "", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["DDD"], "prohibition": ["FFF"], "yesSpanCity": ["TRU"], "notSpanCity": ["ADF"], "maxStrideDays": 0, "banAllDays": 0, "banType": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "transferBlack": ["ING"], "legTransferBlack": ["string"]}
+2019-04-24 14:48:21,956 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-24 14:49:04,040 - INFO - app.py - edit_rule - {"id": 1, "minRate": "0.0", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": "", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["DDD", "AAA"], "prohibition": ["FFF"], "yesSpanCity": ["TRU"], "notSpanCity": ["ADF"], "maxStrideDays": 0, "banAllDays": 0, "banType": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "transferBlack": ["ING"], "legTransferBlack": ["string"]}
+2019-04-24 14:49:04,041 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-24 15:29:38,470 - ERROR - app.py - edit_rule - 修改规则失败
+2019-04-24 15:34:23,804 - ERROR - app.py - edit_rule - 修改规则失败
+2019-04-24 15:55:44,852 - ERROR - app.py - edit_rule - 修改规则失败
+2019-04-24 16:01:37,098 - ERROR - app.py - log_exception - Exception on /edit_rule/2 [POST]
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 122, in wrap
+    return f(*args, **kwargs)
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 225, in edit_rule
+    dict = processInput(request.form.to_dict())
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 165, in processInput
+    dict["banType"] = str_split(dict["banType"])
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 153, in str_split
+    return str.split('')
+ValueError: empty separator
+2019-04-24 16:03:43,821 - ERROR - app.py - edit_rule - 修改规则失败
+2019-04-24 16:04:08,201 - ERROR - app.py - edit_rule - 修改规则失败
+2019-04-24 16:07:33,513 - ERROR - app.py - edit_rule - 修改规则失败
+2019-04-24 16:10:42,688 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "1", "maxFlightDistance": 1, "maxFlightTime": 1, "maxStopPoint": "1", "maxTransfer": "1", "permission": ["1"], "prohibition": ["1"], "yesSpanCity": ["CAN", "PEK", "CAN", "PEK"], "notSpanCity": ["CAN", "PEK"], "maxStrideDays": 1, "banAllDays": 1, "banType": ["CAN", "PEK"], "carrierWhite": ["CAN", "PEK"], "carrierBlack": ["CAN-PEK"], "legTransferWhite": ["CAN-PEK\uff1aWUH", "CAN-PEK\uff1aWUH"], "transferBlack": ["1"], "legTransferBlack": ["CAN-PEK\uff1aWUH", "CAN-PEK\uff1aWUH"]}
+2019-04-24 16:10:42,688 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-24 16:13:49,838 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "1.0", "maxFlightDistance": 1, "maxFlightTime": "", "maxStopPoint": "1", "maxTransfer": "1", "permission": ["1"], "prohibition": ["1"], "yesSpanCity": ["CAN", "", "", "PEK", "", "", "CAN", "", "", "PEK"], "notSpanCity": ["CAN", "", "", "PEK"], "maxStrideDays": 1, "banAllDays": 1, "banType": ["CAN", "", "", "PEK"], "carrierWhite": ["CAN", "", "", "PEK"], "carrierBlack": ["CAN-PEK"], "legTransferWhite": ["CAN-PEK:WUH", "", "", "CAN-PEK:WUH"], "transferBlack": ["1"], "legTransferBlack": ["CAN-PEK:WUH", "", "", "CAN-PEK:WUH"]}
+2019-04-24 16:13:49,838 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-24 16:16:28,149 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "1.0", "maxFlightDistance": 1, "maxFlightTime": "", "maxStopPoint": "1", "maxTransfer": "1", "permission": ["1"], "prohibition": ["1"], "yesSpanCity": ["CAN", "", "", "PEK", "", "", "CAN", "", "", "PEK"], "notSpanCity": ["CAN", "", "", "PEK"], "maxStrideDays": 1, "banAllDays": 1, "banType": ["CAN", "", "", "PEK"], "carrierWhite": ["CAN", "", "", "PEK"], "carrierBlack": ["CAN-PEK"], "legTransferWhite": ["CAN-PEK:WUH", "", "", "CAN-PEK:WUH"], "transferBlack": ["1"], "legTransferBlack": ["CAN-PEK:WUH", "", "", "CAN-PEK:WUH"]}
+2019-04-24 16:16:28,149 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-24 16:17:25,901 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "1.0", "maxFlightDistance": 1, "maxFlightTime": "", "maxStopPoint": "1", "maxTransfer": "1", "permission": ["1"], "prohibition": ["1"], "yesSpanCity": ["CAN", "PEK", "CAN", "PEK"], "notSpanCity": ["CAN", "PEK"], "maxStrideDays": 1, "banAllDays": 1, "banType": ["CAN", "PEK"], "carrierWhite": ["CAN", "PEK"], "carrierBlack": ["CAN-PEK"], "legTransferWhite": ["CAN-PEK:WUH", "CAN-PEK:WUH"], "transferBlack": ["1"], "legTransferBlack": ["CAN-PEK:WUH", "CAN-PEK:WUH"]}
+2019-04-24 16:17:25,902 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-24 16:29:44,258 - INFO - app.py - edit_rule - {"id": 2, "minRate": "0.1", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": "", "maxStopPoint": "0", "maxTransfer": "2", "permission": ["string"], "prohibition": ["string"], "yesSpanCity": ["string"], "notSpanCity": ["string"], "maxStrideDays": 0, "banAllDays": 0, "banType": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "transferBlack": ["string"], "legTransferBlack": ["string"]}
+2019-04-24 16:29:44,260 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-24 16:30:45,558 - ERROR - app.py - add_rule - 添加规则失败
+2019-04-24 16:40:15,396 - ERROR - app.py - log_exception - Exception on /add_rule [POST]
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 122, in wrap
+    return f(*args, **kwargs)
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 206, in add_rule
+    dict = processInput(request.form.to_dict())
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 178, in processInput
+    removed = dict(x for x in dict.iteritems() if all(x))
+TypeError: 'dict' object is not callable
+2019-04-24 16:44:07,935 - ERROR - app.py - add_rule - 添加规则失败

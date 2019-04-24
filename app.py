@@ -1,4 +1,4 @@
-# coding = utf-8
+# -*- coding: UTF-8 -*-
 from __future__ import unicode_literals
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
 #from data import Articles
@@ -133,82 +133,34 @@ def logout():
     flash('You are now logged out', 'success')
     return redirect(url_for('login'))
 
-# Dashboard
-@app.route('/dashboard')
-@is_logged_in
-def dashboard():
-    # Get rules
-    response = requests.get(app.config['ENDPOINT']+app.config['GET_ALL_URL'])
-    rules = response.json()
-    for rule in rules:
-        for key in rule:
-            if isinstance(rule[key], list):
-                rule[key] = ', '.join(rule[key])
-            
-    return render_template('dashboard.html', rules=rules)
-
-# Article Form Class
-class ArticleForm(Form):
-    title = StringField('Title', [validators.Length(min=1, max=200)])
-    body = TextAreaField('Body', [validators.Length(min=30)])
-
-# Add Rule
-@app.route('/add_rule', methods=['GET', 'POST'])
-@is_logged_in
-def add_rule():
-    form = ArticleForm(request.form)
-    if request.method == 'POST' and form.validate():
-        title = form.title.data
-        body = form.body.data
-
-        # Create Cursor
-        cur = mysql.connection.cursor()
-
-        # Execute
-        cur.execute("INSERT INTO articles(title, body, author) VALUES(%s, %s, %s)",(title, body, session['username']))
-
-        # Commit to DB
-        mysql.connection.commit()
-
-        #Close connection
-        cur.close()
-
-        flash('Article Created', 'success')
-
-        return redirect(url_for('dashboard'))
-
-    return render_template('add_rule.html', form=form)
-
-
-# Edit Rule
-@app.route('/edit_rule/<string:id>', methods=['POST'])
-@is_logged_in
-def edit_rule(id):
-
-    # util functions
-    def to_int(str):
-        if str == None or str == '' or str.isspace():
-            return ''
+# Utility functions
+def to_int(str):
+    # 先把None转为''
+    if str == None or str == '' or str.isspace():
+        return ''
+    else:
+        try:
+            str = int(str)
+        except Exception as e:
+            app.logger.error('修改规则时输入格式错误')
+            app.logger.error('%s', e)
+            flash('输入格式错误，请检查后再试', 'danger')
         else:
-            try:
-                str = int(str)
-            except Exception as e:
-                app.logger.error('修改规则时输入格式错误')
-                app.logger.error('%s', e)
-                flash('输入格式错误，请检查后再试', 'danger')
-            else:
-                return str
-    def str_split(str):
-        if str == None or str == '' or str.isspace():
-            return ''
-        else:
-            return str.split()
+            return str
+def str_split(str):
+    if str == None or str == '' or str.isspace():
+        return ''
+    else:
+        return str.split() # split多个空格，不可以是单个
 
-    # preprocess input text
-    dict = request.form.to_dict()
-    dict["id"] = int(dict["id"])
+# Preprocess user input (add/edit)
+def processInput(dict):
+    if 'id' in dict.keys():
+        dict["id"] = int(dict["id"])
+
     dict["maxFlightDistance"] = to_int(dict["maxFlightDistance"])
     dict["maxFlightTime"] = to_int(dict["maxFlightTime"])
+
     dict["maxStrideDays"] = to_int(dict["maxStrideDays"])
     dict["banAllDays"] = to_int(dict["banAllDays"])
     dict["banType"] = str_split(dict["banType"])
@@ -221,15 +173,75 @@ def edit_rule(id):
     dict["prohibition"] = str_split(dict["prohibition"])
     dict["transferBlack"] = str_split(dict["transferBlack"])
     dict["yesSpanCity"] = str_split(dict["yesSpanCity"])
+
+    # remove keys with empty values
+    removed = {x[0]:x[1] for x in dict.iteritems() if all(x)}
+
+    return removed
+
+# Dashboard
+@app.route('/dashboard')
+@is_logged_in
+def dashboard():
+    # Get rules
+    #response = requests.get(app.config['ENDPOINT']+app.config['GET_ALL_URL'])
+    #rules = response.json()
+    rules = {"id":1}
+    # for rule in rules:
+    #     for key in rule:
+    #         if isinstance(rule[key], list):
+    #             rule[key] = ' '.join(rule[key]) # 需要与split对应
+    #         if rule[key] == None: # python中空串与None不同
+    #             rule[key] = ''
+            
+            
+    return render_template('dashboard.html', rules=rules)
+
+
+# Add Rule
+@app.route('/add_rule', methods=['POST'])
+@is_logged_in
+def add_rule():
+
+    # preprocess input text
+    dict = processInput(request.form.to_dict())
+    form = json.dumps(dict)        
+    header = {"Content-Type": "application/json"}    
+    r = requests.post(app.config['ENDPOINT']+app.config['INSERT_URL'], headers=h, data=form)
+    
+    if r.status_code == 200:
+        app.logger.info(form)
+        app.logger.info('添加规则成功')
+        flash('添加规则成功', 'success')
+    else:
+        app.logger.error('添加规则失败')
+        flash('添加规则失败，请检查输入格式后再试', 'danger')
+
+
+
+    return redirect('/dashboard')
+
+
+
+# Edit Rule
+@app.route('/edit_rule/<string:id>', methods=['POST'])
+@is_logged_in
+def edit_rule(id):
+
+    # preprocess input text
+    dict = processInput(request.form.to_dict())
     form = json.dumps(dict)            
     header = {"Content-Type": "application/json"}
     r = requests.put(app.config['ENDPOINT']+app.config['UPDATE_URL'], headers=header, data=form)
     
+    print(form)
     if r.status_code == 200:
         app.logger.info(form)
         app.logger.info('修改规则成功')
+        flash('修改规则成功', 'success')
     else:
         app.logger.error('修改规则失败')
+        flash('修改规则失败，请检查输入格式后再试', 'danger')
 
 
     return redirect('/dashboard')
@@ -238,13 +250,19 @@ def edit_rule(id):
 # Delete Rule
 @app.route('/delete_rule/<string:id>', methods=['POST'])
 @is_logged_in
-def delete_rule(id):
-    
-
-    flash('规则删除成功', 'success')
-
+def delete_rule(id):   
+    dict = { "id": id }
+    form = json.dumps(dict)
+    r = requests.delete(app.config['ENDPOINT']+app.config['DELETE_URL'], data=form)
+    if r.status_code == 200:
+        app.logger.info('delete rule id = %s', id)
+        app.logger.info('删除规则成功')
+        flash('删除规则成功', 'success')
+    else:
+        app.logger.error('删除规则失败')
+        flash('删除规则失败，请检查输入格式后再试', 'danger')
     return redirect('/dashboard')
 
+
 if __name__ == '__main__':
-    app.secret_key='secret123'
     app.run(debug=True)

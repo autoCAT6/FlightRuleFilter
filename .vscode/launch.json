@@ -10,6 +10,8 @@
             "request": "launch",
             "module": "flask",
             "env": {
+                "program": "${fileDirname}",
+                "cwd": "${fileDirname}",
                 "FLASK_APP": "/Users/xiyanzhi/workspace/myflaskapp/app.py",
             },
             "args": [
