@@ -1,14 +1,25 @@
-# -*- coding: UTF-8 -*-
-
+# coding = utf-8
+from __future__ import unicode_literals
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
 #from data import Articles
-from flask_mysqldb import MySQL
+# from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
 import requests
+import json
+import logging
+from datetime import datetime
 
 app = Flask(__name__)
+app.config.from_pyfile('config.py')
+
+# 系统日志配置
+handler = logging.FileHandler(app.config['LOGFILE'], encoding='UTF-8')
+logging_format = logging.Formatter('%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(message)s')
+handler.setFormatter(logging_format)
+app.logger.setLevel(logging.DEBUG)
+app.logger.addHandler(handler)
 
 # # Config MySQL
 # app.config['MYSQL_HOST'] = 'localhost'
@@ -17,42 +28,18 @@ app = Flask(__name__)
 # app.config['MYSQL_DB'] = 'myflaskapp'
 # app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 # # init MYSQL
-mysql = MySQL(app)
+# mysql = MySQL(app)
 
-app.config.from_pyfile('config.py')
-#Articles = Articles()
 
 # Index
 @app.route('/')
 def index():
     return render_template('home.html')
 
-
 # About
 @app.route('/about')
 def about():
     return render_template('about.html')
-
-
-# Articles
-# @app.route('/articles')
-# def articles():
-#     # Create cursor
-#     cur = mysql.connection.cursor()
-
-#     # Get articles
-#     result = cur.execute("SELECT * FROM articles")
-
-#     articles = cur.fetchall()
-
-#     if result > 0:
-#         return render_template('articles.html', articles=articles)
-#     else:
-#         msg = 'No Articles Found'
-#         return render_template('articles.html', msg=msg)
-#     # Close connection
-#     cur.close()
-
 
 # Single Article
 @app.route('/article/<string:id>/')
@@ -115,36 +102,6 @@ def login():
         # Get Form Fields
         username = request.form['username']
         password_candidate = request.form['password']
-
-        # Create cursor
-        # cur = mysql.connection.cursor()
-
-        # 第一步不用连接数据库验证
-        # Get user by username
-        # result = cur.execute("SELECT * FROM users WHERE username = %s", [username])
-
-        # if result > 0:
-        #     # Get stored hash
-        #     data = cur.fetchone()
-        #     password = data['password']
-
-        #     # Compare Passwords
-        #     if sha256_crypt.verify(password_candidate, password):
-        #         # Passed
-        #         session['logged_in'] = True
-        #         session['username'] = username
-
-        #         flash('You are now logged in', 'success')
-        #         return redirect(url_for('dashboard'))
-        #     else:
-        #         error = 'Invalid login'
-        #         return render_template('login.html', error=error)
-        #     # Close connection
-        #     cur.close()
-        # else:
-        #     error = 'Username not found'
-        #     return render_template('login.html', error=error)
-        
         if username == 'admin' and password_candidate == 'admin':
             session['logged_in'] = True
             session['username'] = username
@@ -180,31 +137,14 @@ def logout():
 @app.route('/dashboard')
 @is_logged_in
 def dashboard():
-    # Create cursor
-    # cur = mysql.connection.cursor()
-
-    # Get articles
-    #result = cur.execute("SELECT * FROM articles")
-    # Show articles only from the user logged in 
-    # result = cur.execute("SELECT * FROM articles WHERE author = %s", [session['username']])
-
-    # articles = cur.fetchall()
-
-    # if result > 0:
-    #     return render_template('dashboard.html', articles=articles)
-    # else:
-    #     msg = 'No Articles Found'
-    #     return render_template('dashboard.html', msg=msg)
-    # Close connection
-    # cur.close()
-
-    # Dashboard 默认显示所有筛选规则，只需提供 UPDATE/DELETE 接口
-
     # Get rules
-    payload = {'Accept': '*/*'}
-    response = requests.get(app.config['ENDPOINT']+app.config['GET_ALL_URL'], params=payload)
-    rules = response.json() # list of records
-    
+    response = requests.get(app.config['ENDPOINT']+app.config['GET_ALL_URL'])
+    rules = response.json()
+    for rule in rules:
+        for key in rule:
+            if isinstance(rule[key], list):
+                rule[key] = ', '.join(rule[key])
+            
     return render_template('dashboard.html', rules=rules)
 
 # Article Form Class
@@ -240,65 +180,70 @@ def add_rule():
     return render_template('add_rule.html', form=form)
 
 
-# Edit Article
-@app.route('/edit_article/<string:id>', methods=['GET', 'POST'])
+# Edit Rule
+@app.route('/edit_rule/<string:id>', methods=['POST'])
 @is_logged_in
-def edit_article(id):
-    # Create cursor
-    cur = mysql.connection.cursor()
+def edit_rule(id):
 
-    # Get article by id
-    result = cur.execute("SELECT * FROM articles WHERE id = %s", [id])
+    # util functions
+    def to_int(str):
+        if str == None or str == '' or str.isspace():
+            return ''
+        else:
+            try:
+                str = int(str)
+            except Exception as e:
+                app.logger.error('修改规则时输入格式错误')
+                app.logger.error('%s', e)
+                flash('输入格式错误，请检查后再试', 'danger')
+            else:
+                return str
+    def str_split(str):
+        if str == None or str == '' or str.isspace():
+            return ''
+        else:
+            return str.split()
 
-    article = cur.fetchone()
-    cur.close()
-    # Get form
-    form = ArticleForm(request.form)
+    # preprocess input text
+    dict = request.form.to_dict()
+    dict["id"] = int(dict["id"])
+    dict["maxFlightDistance"] = to_int(dict["maxFlightDistance"])
+    dict["maxFlightTime"] = to_int(dict["maxFlightTime"])
+    dict["maxStrideDays"] = to_int(dict["maxStrideDays"])
+    dict["banAllDays"] = to_int(dict["banAllDays"])
+    dict["banType"] = str_split(dict["banType"])
+    dict["carrierBlack"] = str_split(dict["carrierBlack"])
+    dict["carrierWhite"] = str_split(dict["carrierWhite"])
+    dict["legTransferBlack"] = str_split(dict["legTransferBlack"])
+    dict["legTransferWhite"] = str_split(dict["legTransferWhite"])
+    dict["notSpanCity"] = str_split(dict["notSpanCity"])
+    dict["permission"] = str_split(dict["permission"])
+    dict["prohibition"] = str_split(dict["prohibition"])
+    dict["transferBlack"] = str_split(dict["transferBlack"])
+    dict["yesSpanCity"] = str_split(dict["yesSpanCity"])
+    form = json.dumps(dict)            
+    header = {"Content-Type": "application/json"}
+    r = requests.put(app.config['ENDPOINT']+app.config['UPDATE_URL'], headers=header, data=form)
+    
+    if r.status_code == 200:
+        app.logger.info(form)
+        app.logger.info('修改规则成功')
+    else:
+        app.logger.error('修改规则失败')
 
-    # Populate article form fields
-    form.title.data = article['title']
-    form.body.data = article['body']
 
-    if request.method == 'POST' and form.validate():
-        title = request.form['title']
-        body = request.form['body']
+    return redirect('/dashboard')
 
-        # Create Cursor
-        cur = mysql.connection.cursor()
-        app.logger.info(title)
-        # Execute
-        cur.execute ("UPDATE articles SET title=%s, body=%s WHERE id=%s",(title, body, id))
-        # Commit to DB
-        mysql.connection.commit()
 
-        #Close connection
-        cur.close()
-
-        flash('Article Updated', 'success')
-
-        return redirect(url_for('dashboard'))
-
-    return render_template('edit_article.html', form=form)
-
-# Delete Article
-@app.route('/delete_article/<string:id>', methods=['POST'])
+# Delete Rule
+@app.route('/delete_rule/<string:id>', methods=['POST'])
 @is_logged_in
-def delete_article(id):
-    # Create cursor
-    cur = mysql.connection.cursor()
+def delete_rule(id):
+    
 
-    # Execute
-    cur.execute("DELETE FROM articles WHERE id = %s", [id])
+    flash('规则删除成功', 'success')
 
-    # Commit to DB
-    mysql.connection.commit()
-
-    #Close connection
-    cur.close()
-
-    flash('Article Deleted', 'success')
-
-    return redirect(url_for('dashboard'))
+    return redirect('/dashboard')
 
 if __name__ == '__main__':
     app.secret_key='secret123'

@@ -1,0 +1,7 @@
+2019-04-24 14:12:49,303 - ERROR - app.py - to_int - 195 - invalid literal for int() with base 10: ''
+2019-04-24 14:16:48,502 - ERROR - app.py - to_int - 195 - 修改规则时输入格式错误
+2019-04-24 14:16:48,503 - ERROR - app.py - to_int - 196 - invalid literal for int() with base 10: ''
+2019-04-24 14:19:16,521 - ERROR - app.py - to_int - 195 - 修改规则时输入格式错误
+2019-04-24 14:19:16,522 - ERROR - app.py - to_int - 196 - invalid literal for int() with base 10: ''
+2019-04-24 14:26:32,396 - INFO - app.py - edit_rule - 229 - {"id": 1, "minRate": "0.0", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": "", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["DDD"], "prohibition": ["FFF"], "yesSpanCity": ["TRU"], "notSpanCity": ["ADF"], "maxStrideDays": 0, "banAllDays": 0, "banType": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "transferBlack": ["ING"], "legTransferBlack": ["string"]}
+2019-04-24 14:26:32,397 - INFO - app.py - edit_rule - 230 - 修改规则成功
