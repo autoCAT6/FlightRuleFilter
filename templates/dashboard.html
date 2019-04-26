@@ -255,9 +255,10 @@
     }
     
     .modal .form-control {
-        border-radius: 2px;
+        border-radius: 4px;
         box-shadow: none;
         border-color: #dddddd;
+        margin-bottom: 5px;
     }
     /* .modal textarea.form-control {
         resize: vertical;
@@ -320,6 +321,7 @@
                       <label for="selectAll"></label>
                     </span>
                 </th> -->
+                <th>类型</th>
                 <th>rule id</th>
                 <th>min绕行率</th>
                 <th>max绕行率 </th>
@@ -350,6 +352,15 @@
                       <label for="checkbox1"></label>
                     </span>
                 </td> -->
+
+                {% if rule.type == 1 %}
+                <td style="color: red">
+                    全局
+                </td>
+                {% else %}
+                <td>局部</td>
+                {% endif %}
+
                 <td>{{rule.id}}</td>
                 <td>{{rule.minRate}} </td>
                 <td>{{rule.maxRate}} </td>
@@ -362,7 +373,11 @@
                 <td>{{rule.yesSpanCity}}</td>
                 <td>{{rule.notSpanCity}}</td>
                 <td>{{rule.maxStrideDays}}</td>
-                <td>{{rule.banAllDays}}</td>
+                {% if rule.banAllDays == 1 %}
+                <td>是</td>
+                {% else %}
+                <td>否</td>
+                {% endif %}
                 <td>{{rule.banType}}</td>
                 <td>{{rule.carrierWhite}}</td>
                 <td>{{rule.carrierBlack}}</td>
@@ -451,8 +466,25 @@
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>禁止所有跨天</label>
-                                                <input type="number" name="banAllDays" value="{{rule.banAllDays}}" class="form-control">
+                                                <!-- <select name="banAllDays" class="form-control">
+                                                    <option value="1">是</option>
+                                                    <option value="0">否</option>
+                                                </select> -->
+                                                <!-- <input type="number" name="banAllDays" value="{{rule.banAllDays}}" class="form-control"> -->
+
+
+                                                <select name="banAllDays" class="form-control">
+                                                    {% if rule.banAllDays == 1 %}
+                                                        <option value="1" selected="selected">是</option>
+                                                        <option value="0">否</option>
+                                                    {% else %}
+                                                        <option value="1">是</option>
+                                                        <option value="0" selected="selected">否</option>
+                                                    {% endif %}
+                                                </select>
+
                                             </div>
+
                                         </div>
 
                                         <div class="form-group">
@@ -597,7 +629,11 @@
                         </div>
                         <div class="col-sm-6">
                             <label>禁止所有跨天</label>
-                            <input type="number" name="banAllDays" class="form-control">
+                            <select name="banAllDays" class="form-control">
+                                <option value="1">是</option>
+                                <option value="0" selected>否</option>     
+                            </select>
+                            <!-- <input type="number" name="banAllDays" class="form-control"> -->
                         </div>
                         <div class="col-sm-6">
                             <label>禁止机型</label>

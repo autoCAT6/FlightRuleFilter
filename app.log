@@ -69,3 +69,176 @@ Traceback (most recent call last):
     removed = dict(x for x in dict.iteritems() if all(x))
 TypeError: 'dict' object is not callable
 2019-04-24 16:44:07,935 - ERROR - app.py - add_rule - 添加规则失败
+2019-04-25 09:58:27,831 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 09:58:46,597 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:00:47,251 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:01:39,796 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:01:41,281 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:01:51,213 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:02:21,240 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:02:22,259 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:02:39,415 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:02:57,743 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:03:01,080 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:03:58,353 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:05:12,374 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:06:38,207 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 10:08:46,381 - INFO - app.py - edit_rule - {"notSpanCity": ["notSpanCity"], "maxStopPoint": "0", "permission": ["permission"], "maxTransfer": "0", "minRate": "0.0", "prohibition": ["prohibition"], "carrierWhite": ["CZ"], "legTransferBlack": ["legTransferBlack"], "maxRate": "0.0", "banType": ["banType"], "legTransferWhite": ["legTransferWhite"], "carrierBlack": ["carrierBlack"], "yesSpanCity": ["yesSpanCity"], "id": 1, "transferBlack": ["transferBlack"]}
+2019-04-25 10:08:46,382 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 10:08:55,045 - INFO - app.py - edit_rule - {"notSpanCity": ["notSpanCity"], "maxStopPoint": "0", "permission": ["permission"], "maxTransfer": "0", "minRate": "0.0", "prohibition": ["prohibition"], "carrierWhite": ["GZ"], "legTransferBlack": ["legTransferBlack"], "maxRate": "0.0", "banType": ["banType"], "legTransferWhite": ["legTransferWhite"], "carrierBlack": ["carrierBlack"], "yesSpanCity": ["yesSpanCity"], "id": 1, "transferBlack": ["transferBlack"]}
+2019-04-25 10:08:55,046 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 10:09:40,401 - INFO - app.py - delete_rule - delete rule id = 1
+2019-04-25 10:09:40,402 - INFO - app.py - delete_rule - 删除规则成功
+2019-04-25 10:09:45,573 - INFO - app.py - delete_rule - delete rule id = 1
+2019-04-25 10:09:45,574 - INFO - app.py - delete_rule - 删除规则成功
+2019-04-25 10:11:26,324 - INFO - app.py - edit_rule - {"id": 1, "minRate": "0.0", "maxRate": "0.0", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["permission"], "prohibition": ["prohibition"], "yesSpanCity": ["yesSpanCity"], "notSpanCity": ["notSpanCity"], "banType": ["banType"], "transferBlack": ["transferBlack"], "carrierWhite": ["sz"], "carrierBlack": ["carrierBlack"], "legTransferWhite": ["legTransferWhite"], "legTransferBlack": ["legTransferBlack"]}
+2019-04-25 10:11:26,324 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 10:11:37,999 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "0.0", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["string"], "prohibition": ["string"], "yesSpanCity": ["string"], "notSpanCity": ["string"], "banType": ["string"], "transferBlack": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "legTransferBlack": ["string"]}
+2019-04-25 10:11:37,999 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 10:12:07,405 - INFO - app.py - add_rule - {"minRate": "7"}
+2019-04-25 10:12:07,405 - INFO - app.py - add_rule - 添加规则成功
+2019-04-25 10:20:37,601 - INFO - app.py - edit_rule - {"id": 1, "minRate": "0.0", "maxRate": "0.0", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["permission"], "prohibition": ["prohibition"], "yesSpanCity": ["yesSpanCity"], "notSpanCity": ["notSpanCity"], "banType": ["banType"], "transferBlack": ["transferBlack"], "carrierWhite": ["sz"], "carrierBlack": ["carrierBlack", "GZ"], "legTransferWhite": ["legTransferWhite"], "legTransferBlack": ["legTransferBlack"]}
+2019-04-25 10:20:37,603 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 10:30:52,321 - INFO - app.py - add_rule - {"minRate": "1.7"}
+2019-04-25 10:30:52,322 - INFO - app.py - add_rule - 添加规则成功
+2019-04-25 10:30:59,755 - INFO - app.py - delete_rule - delete rule id = 21
+2019-04-25 10:30:59,755 - INFO - app.py - delete_rule - 删除规则成功
+2019-04-25 10:31:06,995 - INFO - app.py - delete_rule - delete rule id = 21
+2019-04-25 10:31:06,996 - INFO - app.py - delete_rule - 删除规则成功
+2019-04-25 10:36:27,604 - ERROR - app.py - delete_rule - 删除规则失败
+2019-04-25 10:36:31,965 - ERROR - app.py - delete_rule - 删除规则失败
+2019-04-25 10:36:46,759 - ERROR - app.py - delete_rule - 删除规则失败
+2019-04-25 10:38:44,266 - INFO - app.py - add_rule - {"minRate": "2.2"}
+2019-04-25 10:38:44,267 - INFO - app.py - add_rule - 添加规则成功
+2019-04-25 10:43:46,975 - ERROR - app.py - add_rule - 添加规则失败
+2019-04-25 10:44:00,499 - ERROR - app.py - add_rule - 添加规则失败
+2019-04-25 10:44:29,980 - INFO - app.py - add_rule - {"carrierWhite": ["3"]}
+2019-04-25 10:44:29,981 - INFO - app.py - add_rule - 添加规则成功
+2019-04-25 10:45:06,758 - INFO - app.py - add_rule - {"maxRate": "10", "carrierBlack": ["3"]}
+2019-04-25 10:45:06,759 - INFO - app.py - add_rule - 添加规则成功
+2019-04-25 11:37:50,140 - INFO - app.py - edit_rule - {"id": 1, "minRate": "0.0", "maxRate": "0.0", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["permission"], "prohibition": ["prohibition"], "yesSpanCity": ["yesSpanCity"], "notSpanCity": ["notSpanCity"], "banType": ["banType"], "transferBlack": ["transferBlack"], "carrierWhite": ["CZ"], "carrierBlack": ["carrierBlack", "GZ"], "legTransferWhite": ["legTransferWhite"], "legTransferBlack": ["legTransferBlack"]}
+2019-04-25 11:37:50,142 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 11:37:59,755 - ERROR - app.py - delete_rule - 删除规则失败
+2019-04-25 11:38:14,891 - INFO - app.py - add_rule - {"minRate": "1.8"}
+2019-04-25 11:38:14,892 - INFO - app.py - add_rule - 添加规则成功
+2019-04-25 11:39:26,728 - INFO - app.py - add_rule - {"carrierBlack": ["XXX"]}
+2019-04-25 11:39:26,729 - INFO - app.py - add_rule - 添加规则成功
+2019-04-25 14:41:56,096 - ERROR - app.py - delete_rule - 删除规则失败
+2019-04-25 14:42:56,392 - ERROR - app.py - delete_rule - 删除规则失败
+2019-04-25 14:43:35,993 - ERROR - app.py - delete_rule - 删除规则失败
+2019-04-25 14:43:53,138 - ERROR - app.py - delete_rule - 删除规则失败
+2019-04-25 15:20:06,384 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 15:20:15,998 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 15:20:55,186 - ERROR - app.py - dashboard - 连接数据库失败
+2019-04-25 16:14:44,087 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "0.0", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["string"], "prohibition": ["string"], "yesSpanCity": ["string"], "notSpanCity": ["string"], "banAllDays": 1, "banType": ["string"], "transferBlack": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "legTransferBlack": ["string"]}
+2019-04-25 16:14:44,089 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 16:15:30,253 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "0.0", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["string"], "prohibition": ["string"], "yesSpanCity": ["string"], "notSpanCity": ["string"], "banType": ["string"], "transferBlack": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "legTransferBlack": ["string"]}
+2019-04-25 16:15:30,254 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 16:36:13,790 - ERROR - app.py - processInput - 修改规则时输入格式错误
+2019-04-25 16:36:13,793 - ERROR - app.py - processInput - 'banAllDays'
+2019-04-25 16:38:29,568 - ERROR - app.py - processInput - 修改规则时输入格式错误
+2019-04-25 16:38:29,569 - ERROR - app.py - processInput - 'banAllDays'
+2019-04-25 16:38:38,809 - ERROR - app.py - processInput - 修改规则时输入格式错误
+2019-04-25 16:38:38,812 - ERROR - app.py - processInput - 'banAllDays'
+2019-04-25 16:41:25,086 - ERROR - app.py - processInput - 修改规则时输入格式错误
+2019-04-25 16:41:25,086 - ERROR - app.py - processInput - 'banAllDays'
+2019-04-25 16:41:42,504 - ERROR - app.py - processInput - 修改规则时输入格式错误
+2019-04-25 16:41:42,504 - ERROR - app.py - processInput - 'banAllDays'
+2019-04-25 16:45:12,320 - ERROR - app.py - processInput - 修改规则时输入格式错误
+2019-04-25 16:45:12,322 - ERROR - app.py - processInput - u'banAllDays'
+2019-04-25 16:46:48,607 - ERROR - app.py - processInput - 修改规则时输入格式错误
+2019-04-25 16:46:48,609 - ERROR - app.py - processInput - u'banAllDays'
+2019-04-25 16:46:48,621 - ERROR - app.py - log_exception - Exception on /edit_rule/3 [POST]
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 122, in wrap
+    return f(*args, **kwargs)
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 251, in edit_rule
+    form = json.dumps(dict)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 243, in dumps
+    return _default_encoder.encode(obj)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/encoder.py", line 207, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/encoder.py", line 270, in iterencode
+    return _iterencode(o, 0)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/encoder.py", line 184, in default
+    raise TypeError(repr(o) + " is not JSON serializable")
+TypeError: <Response 227 bytes [302 FOUND]> is not JSON serializable
+2019-04-25 16:47:28,990 - ERROR - app.py - processInput - 修改规则时输入格式错误
+2019-04-25 16:47:28,991 - ERROR - app.py - processInput - u'banAllDays'
+2019-04-25 16:48:29,176 - ERROR - app.py - processInput - 修改规则时输入格式错误
+2019-04-25 16:48:29,180 - ERROR - app.py - processInput - u'banAllDays'
+2019-04-25 16:53:30,623 - ERROR - app.py - processInput - 修改规则时输入格式错误
+2019-04-25 16:56:34,377 - ERROR - app.py - processInput - 修改规则时部分输入为空
+2019-04-25 16:56:34,382 - ERROR - app.py - processInput - u'banAllDays'
+2019-04-25 17:14:55,928 - ERROR - app.py - to_int - 修改规则时输入格式错误
+2019-04-25 17:14:55,929 - ERROR - app.py - to_int - invalid literal for int() with base 10: "''"
+2019-04-25 17:14:55,955 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "0.0", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["string"], "prohibition": ["string"], "yesSpanCity": ["string"], "notSpanCity": ["string"], "banType": ["string"], "transferBlack": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "legTransferBlack": ["string"]}
+2019-04-25 17:14:55,956 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 17:16:44,942 - ERROR - app.py - to_int - 修改规则时输入格式错误
+2019-04-25 17:18:13,243 - ERROR - app.py - to_int - 修改规则时输入格式错误
+2019-04-25 17:18:13,245 - ERROR - app.py - to_int - invalid literal for int() with base 10: "''"
+2019-04-25 17:23:38,626 - INFO - app.py - edit_rule - {"notSpanCity": ["string"], "maxStopPoint": "0", "permission": ["string"], "maxTransfer": "0", "minRate": "1.1", "prohibition": ["string"], "carrierWhite": ["string"], "legTransferBlack": ["string"], "maxRate": "0.0", "banType": ["string"], "legTransferWhite": ["string"], "carrierBlack": ["string"], "yesSpanCity": ["string"], "id": 2, "transferBlack": ["string"]}
+2019-04-25 17:23:38,628 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 17:25:00,830 - INFO - app.py - edit_rule - {"notSpanCity": ["string"], "maxStopPoint": "0", "permission": ["string"], "maxTransfer": "0", "minRate": "1.1", "prohibition": ["string"], "carrierWhite": ["string"], "legTransferBlack": ["string"], "maxRate": "0.0", "banType": ["string"], "legTransferWhite": ["string"], "carrierBlack": ["string"], "yesSpanCity": ["string"], "id": 2, "transferBlack": ["string"]}
+2019-04-25 17:25:00,833 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 17:28:36,879 - ERROR - app.py - log_exception - Exception on /dashboard [GET]
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/2.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 122, in wrap
+    return f(*args, **kwargs)
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 214, in dashboard
+    return render_template('dashboard.html', rules=rules)
+  File "/Library/Python/2.7/site-packages/flask/templating.py", line 134, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Library/Python/2.7/site-packages/jinja2/environment.py", line 869, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Library/Python/2.7/site-packages/jinja2/environment.py", line 830, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Library/Python/2.7/site-packages/jinja2/environment.py", line 804, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Library/Python/2.7/site-packages/jinja2/loaders.py", line 125, in load
+    code = environment.compile(source, name, filename)
+  File "/Library/Python/2.7/site-packages/jinja2/environment.py", line 591, in compile
+    self.handle_exception(exc_info, source_hint=source_hint)
+  File "/Library/Python/2.7/site-packages/jinja2/environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/xiyanzhi/workspace/myflaskapp/templates/dashboard.html", line 377, in template
+    <td>{{是}}</td>
+TemplateSyntaxError: unexpected char u'\u662f' at 9084
+2019-04-25 17:41:36,161 - INFO - app.py - edit_rule - {"notSpanCity": ["string"], "maxStopPoint": "0", "permission": ["string"], "maxTransfer": "0", "minRate": "1.1", "prohibition": ["string"], "carrierWhite": ["string"], "legTransferBlack": ["string"], "maxRate": "0.0", "banType": ["string"], "legTransferWhite": ["string"], "carrierBlack": ["string"], "yesSpanCity": ["string"], "id": 2, "transferBlack": ["string"]}
+2019-04-25 17:41:36,163 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 17:50:07,085 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "0.0", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["string"], "prohibition": ["string"], "yesSpanCity": ["string"], "notSpanCity": ["string"], "banType": ["string"], "transferBlack": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "legTransferBlack": ["string"]}
+2019-04-25 17:50:07,086 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 17:50:54,632 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "0.0", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["string"], "prohibition": ["string"], "yesSpanCity": ["string"], "notSpanCity": ["string"], "banType": ["string"], "transferBlack": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "legTransferBlack": ["string"]}
+2019-04-25 17:50:54,633 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 17:51:56,991 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "0.0", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["string"], "prohibition": ["string"], "yesSpanCity": ["string"], "notSpanCity": ["string"], "banType": ["string"], "transferBlack": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "legTransferBlack": ["string"]}
+2019-04-25 17:51:56,992 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 17:53:08,716 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "0.0", "maxStopPoint": "0", "maxTransfer": "0", "permission": ["string"], "prohibition": ["string"], "yesSpanCity": ["string"], "notSpanCity": ["string"], "banType": ["string"], "transferBlack": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "legTransferBlack": ["string"]}
+2019-04-25 17:53:08,717 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 17:57:08,172 - INFO - app.py - edit_rule - {"id": 2, "minRate": "1.1", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "permission": ["string"], "prohibition": ["string"], "yesSpanCity": ["string"], "notSpanCity": ["string"], "maxStrideDays": 0, "banAllDays": 0, "banType": ["string"], "transferBlack": ["string"], "carrierWhite": ["string"], "carrierBlack": ["string"], "legTransferWhite": ["string"], "legTransferBlack": ["string"]}
+2019-04-25 17:57:08,172 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-25 18:01:25,561 - INFO - app.py - add_rule - {"banAllDays": 1}
+2019-04-25 18:01:25,562 - INFO - app.py - add_rule - 添加规则成功
+2019-04-25 18:01:35,445 - INFO - app.py - add_rule - {"prohibition": ["stringer"], "banAllDays": 1}
+2019-04-25 18:01:35,445 - INFO - app.py - add_rule - 添加规则成功
+2019-04-25 18:06:08,836 - INFO - app.py - add_rule - {"transferBlack": ["GG"]}
+2019-04-25 18:06:08,837 - INFO - app.py - add_rule - 添加规则成功

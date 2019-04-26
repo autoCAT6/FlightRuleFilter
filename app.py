@@ -157,45 +157,63 @@ def str_split(str):
 def processInput(dict):
     if 'id' in dict.keys():
         dict["id"] = int(dict["id"])
-
-    dict["maxFlightDistance"] = to_int(dict["maxFlightDistance"])
-    dict["maxFlightTime"] = to_int(dict["maxFlightTime"])
-
-    dict["maxStrideDays"] = to_int(dict["maxStrideDays"])
-    dict["banAllDays"] = to_int(dict["banAllDays"])
-    dict["banType"] = str_split(dict["banType"])
-    dict["carrierBlack"] = str_split(dict["carrierBlack"])
-    dict["carrierWhite"] = str_split(dict["carrierWhite"])
-    dict["legTransferBlack"] = str_split(dict["legTransferBlack"])
-    dict["legTransferWhite"] = str_split(dict["legTransferWhite"])
-    dict["notSpanCity"] = str_split(dict["notSpanCity"])
-    dict["permission"] = str_split(dict["permission"])
-    dict["prohibition"] = str_split(dict["prohibition"])
-    dict["transferBlack"] = str_split(dict["transferBlack"])
-    dict["yesSpanCity"] = str_split(dict["yesSpanCity"])
-
-    # remove keys with empty values
-    removed = {x[0]:x[1] for x in dict.iteritems() if all(x)}
-
-    return removed
+    try:
+        # check if key exists
+        # what if it's NoneType
+        dict["maxFlightDistance"] = to_int(dict.get('maxFlightDistance', ""))
+        dict["maxFlightTime"] = to_int(dict.get('maxFlightTime',""))
+        dict["maxStrideDays"] = to_int(dict.get('maxStrideDays',""))
+        dict["banAllDays"] = to_int(dict.get('banAllDays',""))
+        dict["banType"] = str_split(dict.get('banType',""))
+        dict["carrierBlack"] = str_split(dict.get('carrierBlack',""))
+        dict["carrierWhite"] = str_split(dict.get('carrierWhite',""))
+        dict["legTransferBlack"] = str_split(dict.get('legTransferBlack',""))
+        dict["legTransferWhite"] = str_split(dict.get('legTransferWhite',""))
+        dict["notSpanCity"] = str_split(dict.get('notSpanCity',""))
+        dict["permission"] = str_split(dict.get('permission',""))
+        dict["prohibition"] = str_split(dict.get('prohibition',""))
+        dict["transferBlack"] = str_split(dict.get('transferBlack',""))
+        dict["yesSpanCity"] = str_split(dict.get('yesSpanCity',""))
+    except Exception as e:
+        app.logger.error('修改规则时部分输入为空')
+        app.logger.error('%s', e)
+        flash('输入格式错误，请检查后再试', 'danger')
+        return redirect('/dashboard')
+    else:
+        # remove keys with empty values
+        dict = {k:v for k,v in dict.items() if v != ''}
+        # for i in dict.copy():
+        #     if dict[i] == '':
+        #         dict.pop()
+        return dict
 
 # Dashboard
 @app.route('/dashboard')
 @is_logged_in
 def dashboard():
     # Get rules
-    #response = requests.get(app.config['ENDPOINT']+app.config['GET_ALL_URL'])
-    #rules = response.json()
-    rules = {"id":1}
-    # for rule in rules:
-    #     for key in rule:
-    #         if isinstance(rule[key], list):
-    #             rule[key] = ' '.join(rule[key]) # 需要与split对应
-    #         if rule[key] == None: # python中空串与None不同
-    #             rule[key] = ''
+    try:
+        response = requests.get(app.config['ENDPOINT']+app.config['GET_ALL_URL'])
+    except:
+        app.logger.error('连接数据库失败')
+        flash('连接数据库失败', 'danger')
+        return render_template('dashboard.html')
+    else:
+        if response.status_code != 200:
+            app.logger.error('连接数据库失败')
+            flash('连接数据库失败', 'danger')
+            return render_template('dashboard.html')
+
+        rules = response.json()  
+        
+        for rule in rules:  
+            for key in rule:
+                if isinstance(rule[key], list):
+                    rule[key] = ' '.join(rule[key]) # 需要与split对应
+                if rule[key] == None: # python中空串与None不同
+                    rule[key] = ''
             
-            
-    return render_template('dashboard.html', rules=rules)
+        return render_template('dashboard.html', rules=rules)
 
 
 # Add Rule
@@ -207,7 +225,7 @@ def add_rule():
     dict = processInput(request.form.to_dict())
     form = json.dumps(dict)        
     header = {"Content-Type": "application/json"}    
-    r = requests.post(app.config['ENDPOINT']+app.config['INSERT_URL'], headers=h, data=form)
+    r = requests.post(app.config['ENDPOINT']+app.config['INSERT_URL'], headers=header, data=form)
     
     if r.status_code == 200:
         app.logger.info(form)
@@ -234,7 +252,6 @@ def edit_rule(id):
     header = {"Content-Type": "application/json"}
     r = requests.put(app.config['ENDPOINT']+app.config['UPDATE_URL'], headers=header, data=form)
     
-    print(form)
     if r.status_code == 200:
         app.logger.info(form)
         app.logger.info('修改规则成功')
@@ -250,17 +267,20 @@ def edit_rule(id):
 # Delete Rule
 @app.route('/delete_rule/<string:id>', methods=['POST'])
 @is_logged_in
-def delete_rule(id):   
+def delete_rule(id):  
+    id = int(id)
     dict = { "id": id }
     form = json.dumps(dict)
+    print(form)
     r = requests.delete(app.config['ENDPOINT']+app.config['DELETE_URL'], data=form)
-    if r.status_code == 200:
+    resp = r.json()
+    if resp["ok"] == 'True':
         app.logger.info('delete rule id = %s', id)
         app.logger.info('删除规则成功')
         flash('删除规则成功', 'success')
     else:
         app.logger.error('删除规则失败')
-        flash('删除规则失败，请检查输入格式后再试', 'danger')
+        flash('删除规则失败', 'danger')
     return redirect('/dashboard')
 
 
