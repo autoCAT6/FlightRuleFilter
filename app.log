@@ -242,3 +242,12 @@ TemplateSyntaxError: unexpected char u'\u662f' at 9084
 2019-04-25 18:01:35,445 - INFO - app.py - add_rule - 添加规则成功
 2019-04-25 18:06:08,836 - INFO - app.py - add_rule - {"transferBlack": ["GG"]}
 2019-04-25 18:06:08,837 - INFO - app.py - add_rule - 添加规则成功
+2019-04-26 14:40:02,016 - ERROR - app.py - delete_rule - 删除规则失败
+2019-04-26 14:40:02,723 - ERROR - app.py - delete_rule - 删除规则失败
+2019-04-26 14:40:03,587 - ERROR - app.py - delete_rule - 删除规则失败
+2019-04-26 14:40:10,127 - ERROR - app.py - delete_rule - 删除规则失败
+2019-04-26 14:58:38,206 - INFO - app.py - add_rule - {"banAllDays": 0}
+2019-04-26 14:58:38,207 - INFO - app.py - add_rule - 添加规则成功
+2019-04-26 14:59:49,652 - INFO - app.py - add_rule - {"banAllDays": 0, "legTranferWhite": "ACX"}
+2019-04-26 14:59:49,654 - INFO - app.py - add_rule - 添加规则成功
+2019-04-26 15:02:15,924 - ERROR - app.py - add_rule - 添加规则失败

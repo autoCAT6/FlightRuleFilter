@@ -1,101 +1,102 @@
-{% extends 'layout.html' %}
-
-{% block body %}
-  <table class="table table-bordered">
+{% extends 'layout.html' %} {% block body %}
+<table class="table table-bordered">
     <caption>航线筛选规则</caption>
-     <thead>
+    <thead>
         <tr>
-           <th>规则</th>
-           <th>例子</th>
-           <th>备注</th>
+            <th>规则</th>
+            <th>例子</th>
+            <th>备注</th>
         </tr>
-     </thead>
-     <tbody>
+    </thead>
+    <tbody>
         <tr>
-           <td>min绕行率</td>
-           <td></td>
-           <td></td>
-        </tr>
-        <tr>
-           <td>max绕行率</td>
-           <td></td>
-           <td></td>
+            <td>min绕行率</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-          <td>max飞行距离</td>
-          <td></td>
-          <td>飞行距离指两点间距离，如CAN-PEK 1967公里，多段则是每段距离相加</td>
+            <td>max绕行率</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-          <td>max飞行时间</td>
-          <td></td>
-          <td>飞行时间指单段到达时间跟起飞时间的差值。多段则是每段相加。不包括中转停留时间。</td>
+            <td>max飞行距离</td>
+            <td></td>
+            <td>飞行距离指两点间距离，如CAN-PEK 1967公里，多段则是每段距离相加</td>
         </tr>
         <tr>
-          <td>max经停点</td>
-          <td></td>
-          <td>最大值3</td>
+            <td>max飞行时间</td>
+            <td></td>
+            <td>飞行时间指单段到达时间跟起飞时间的差值。多段则是每段相加。不包括中转停留时间。</td>
         </tr>
         <tr>
-          <td>max中转点</td>
-          <td></td>
-          <td>最大值3</td>
+            <td>max经停点</td>
+            <td></td>
+            <td>最大值3</td>
         </tr>
         <tr>
-          <td>同城机场允许中转</td>
-          <td>SHA</td>
-          <td>上海机场SHA/PVG，是否允许中转</td>
+            <td>max中转点</td>
+            <td></td>
+            <td>最大值3</td>
         </tr>
         <tr>
-          <td>允许跨天逗留城市</td>
-          <td></td>
-          <td>跨天是指日期天数增加。如2月13日00:00到2月14日00:00算跨天。2月13日23:59到2月14日00:00也是跨天。</td>
+            <td>同城机场允许中转</td>
+            <td>SHA</td>
+            <td>上海机场SHA/PVG，是否允许中转</td>
         </tr>
         <tr>
-          <td>不允许跨逗留天城市</td>
-          <td></td>
-          <td></td>
+            <td>允许跨天逗留城市</td>
+            <td></td>
+            <td>跨天是指日期天数增加。如2月13日00:00到2月14日00:00算跨天。2月13日23:59到2月14日00:00也是跨天。</td>
         </tr>
         <tr>
-          <td>max跨天数</td>
-          <td></td>
-          <td>最大值3</td>
+            <td>不允许跨逗留天城市</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-          <td>禁止所有跨天</td>
-          <td></td>
-          <td></td>
+            <td>max跨天数</td>
+            <td></td>
+            <td>最大值3</td>
         </tr>
         <tr>
-          <td>禁止机型</td>
-          <td>787</td>
-          <td></td>
+            <td>禁止所有跨天</td>
+            <td></td>
+            <td></td>
         </tr>
         <tr>
-          <td>承运人白名单</td>
-          <td>CZ</td>
-          <td></td>
+            <td>禁止机型</td>
+            <td>787</td>
+            <td></td>
         </tr>
         <tr>
-          <td>承运人黑名单</td>
-          <td>CZ</td>
-          <td></td>
+            <td>承运人白名单</td>
+            <td>CZ</td>
+            <td></td>
         </tr>
         <tr>
-          <td>航段中转点白名单</td>
-          <td>CAN-PEK：WUH</td>
-          <td>设置规则如CAN-PEK航线只允许WUH作为中转点</td>
+            <td>承运人黑名单</td>
+            <td>CZ</td>
+            <td></td>
         </tr>
         <tr>
-          <td>中转点黑名单</td>
-          <td></td>
-          <td>全部航线禁止这些城市作为中转点</td>
+            <td>航段中转点白名单</td>
+            <td>CAN-PEK：WUH</td>
+            <td>设置规则如CAN-PEK航线只允许WUH作为中转点</td>
         </tr>
         <tr>
-          <td>航段中转点黑名单</td>
-          <td>CAN-PEK：WUH</td>
-          <td>设置规则如CAN-PEK航线不允许WUH作为中转点</td>
+            <td>中转点黑名单</td>
+            <td></td>
+            <td>全部航线禁止这些城市作为中转点</td>
         </tr>
-      
-     </tbody>
-  </table>{% endblock %}
+        <tr>
+            <td>航段中转点黑名单</td>
+            <td>CAN-PEK：WUH</td>
+            <td>设置规则如CAN-PEK航线不允许WUH作为中转点</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+{% endblock %}

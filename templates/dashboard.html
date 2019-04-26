@@ -1,4 +1,5 @@
 {% extends 'layout.html' %} {% block body %}
+<link rel="stylesheet" href="../static/selectize.css">
 <style>
     .table-wrapper {
         background: #fff;
@@ -273,29 +274,28 @@
         font-weight: normal;
     }
 </style>
+<script src="../static/selectize.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        // Activate tooltip
-        $('[data-toggle="tooltip"]').tooltip();
+        var airports = ["AAT", "ACX", "ADL", "AKL", "AKU", "ALA", "AMS", "AOG", "AQG", "ARN", "ASB", "ATH", "ATL", "AUH", "AZM", "BAR", "BAV", "BCN", "BFJ", "BHD", "BHX", "BHY", "BKI", "BKK", "BLQ", "BNA", "BNE", "BOD", "BOS", "BPE", "BPL", "BRE", "BRI", "BRU", "BSD", "BUF", "BWI", "BZN", "CAN", "CBR", "CDG", "CEB", "CGD", "CGK", "CGO", "CGQ", "CHC", "CHG", "CIH", "CJJ", "CJU", "CKG", "CLE", "CLT", "CMB", "CNS", "CNX", "CPH", "CSX", "CTA", "CTS", "CTU", "CVG", "CXR", "CZX", "DAC", "DAD", "DAR", "DAT", "DBC", "DBL", "DCA", "DCY", "DDB", "DDG", "DDV", "DEL", "DEN", "DFW", "DHU", "DIG", "DLC", "DLU", "DNH", "DPS", "DQA", "DSN", "DTW", "DUS", "DXB", "DYG", "DYU", "EBB", "EDI", "EJJ", "EJQ", "ENH", "ENY", "EWR", "EWV", "FCO", "FII", "FLL", "FLR", "FOC", "FRA", "FRU", "FSA", "FUG", "FYN", "GEG", "GGX", "GKW", "GLA", "GMP", "GVA", "GYD", "GYS", "HAJ", "HAK", "HAM", "HAN", "HBA", "HBP", "HBV", "HDG", "HEK", "HEL", "HET", "HFE", "HGH", "HHS", "HIA", "HKG", "HKT", "HLD", "HMI", "HND", "HNL", "HNY", "HNZ", "HPG", "HRB", "HSD", "HSN", "HTN", "HUZ", "HYN", "HZG", "IAD", "IAH", "ICN", "IKA", "IKT", "INC", "IND", "IQM", "ISB", "IST", "IUO", "JAX", "JBD", "JED", "JFK", "JGN", "JGS", "JHG", "JIQ", "JJJ", "JJL", "JJN", "JLL", "JMU", "JNG", "JNZ", "JQJ", "JSJ", "JUH", "JXA", "JYQ", "KCA", "KFI", "KHG", "KHH", "KHN", "KIJ", "KIX", "KJI", "KLJ", "KMG", "KOW", "KRL", "KRY", "KTM", "KUL", "KWE", "KWL", "KZZ", "LAS", "LAX", "LBD", "LDS", "LED", "LFQ", "LGA", "LGK", "LHE", "LHR", "LHW", "LIM", "LIS", "LJG", "LLB", "LLD", "LLQ", "LNJ", "LNL", "LPF", "LQP", "LQQ", "LUM", "LUN", "LXA", "LYA", "LYG", "LYI", "LYS", "LZH", "LZO", "LZY", "MAD", "MAN", "MCO", "MDG", "MEL", "MEM", "MEX", "MFM", "MIA", "MIG", "MLE", "MNL", "MRS", "MSN", "MSP", "MSY", "MUC", "MXP", "MXZ", "NAO", "NAP", "NBO", "NBS", "NCE", "NCL", "NDG", "NGB", "NGO", "NHG", "NKG", "NKJ", "NLH", "NLT", "NNG", "NNY", "NRT", "NTE", "NUE", "NYP", "OGG", "OHE", "ORD", "OSL", "OSQ", "PDX", "PEK", "PEN", "PER", "PHL", "PHX", "PIT", "PNH", "PQC", "PRG", "PUS", "PVG", "PXG", "PZI", "QSZ", "RDU", "REP", "RGN", "RIC", "RIZ", "RLZ", "RQA", "RUH", "SAN", "SCL", "SEA", "SFO", "SGN", "SHA", "SHE", "SHF", "SIN", "SJC", "SJW", "SLC", "SMF", "STR", "SVO", "SWA", "SYD", "SYG", "SYM", "SYR", "SYX", "SZV", "SZX", "TAE", "TAO", "TAS", "TBS", "TCG", "TCZ", "TEN", "TGO", "TGX", "THJ", "TLQ", "TLS", "TMV", "TNA", "TNH", "TOY", "TPA", "TPE", "TRN", "TSE", "TSN", "TTV", "TTZ", "TUS", "TVC", "TWC", "TXL", "TXN", "TYN", "UIG", "URC", "UYN", "VBL", "VCE", "VIE", "VRN", "VTE", "VVO", "VWA", "VWB", "WAW", "WDS", "WEH", "WMT", "WNH", "WNZ", "WUH", "WUT", "WUX", "WZE", "XFN", "XIC", "XIY", "XMN", "XNN", "XUZ", "XYW", "YBP", "YCU", "YDD", "YEG", "YHZ", "YIC", "YIH", "YIN", "YIW", "YLW", "YNJ", "YNT", "YNZ", "YOW", "YQB", "YQR", "YSQ", "YTY", "YUG", "YUL", "YUS", "YVR", "YWG", "YXE", "YXS", "YYC", "YYG", "YYJ", "YYT", "YYZ", "ZAT", "ZHA", "ZIU", "ZIX", "ZNG", "ZRH", "ZUH", "ZYI", "GRR", "LQS", "QHX", "WEC", "WXJ"]
+        var planes = ["738", "E90", "73G", "7M8", "319", "73H", "333", "332", "789", "73J", "73W", "E75", "E95", "32S", "321", "320", "77W", "772", "380", "739", "32A", "32B", "757", "752", "753", "76W", "77L", "764", "781", "BUS", "E70", "318", "32Q", "ERD", "CR9", "E7W", "717", "CRJ", "75W", "737", "788", "787", "LMO", "TRN", "359", "744", "DH3", "330", "CR7", "221", "763", "M90", "773", "777", "32N", "SU9", "32L", "733", "339", "AR8", "DH4", "736"]
 
-        // Select/Deselect checkboxes
-        var checkbox = $('table tbody input[type="checkbox"]');
-        $("#selectAll").click(function() {
-            if (this.checked) {
-                checkbox.each(function() {
-                    this.checked = true;
-                });
-            } else {
-                checkbox.each(function() {
-                    this.checked = false;
-                });
-            }
+        $.each(airports, function(index, value) {
+            $('#select-transit')
+                .append($("<option></option>")
+                    .attr("value", value)
+                    .text(value));
         });
-        checkbox.click(function() {
-            if (!this.checked) {
-                $("#selectAll").prop("checked", false);
-            }
+
+        $('#select-transit').selectize({
+            plugins: ['remove_button']
         });
+
+        $('.btn').click(function() {
+
+        });
+
+
     });
 </script>
 <div class="table-wrapper">
@@ -650,7 +650,9 @@
                         </div>
                         <div class="col-sm-6">
                             <label>航段中转点白名单</label>
-                            <input type="text" name="legTransferWhite" class="form-control">
+                            <select id="select-transit" name="legTransferWhite" multiple="multiple">
+                            </select>
+
                         </div>
                         <div class="col-sm-6">
                             <label>中转点黑名单</label>

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from flask import Flask, render_template, flash, redirect, url_for, session, request, logging
 #from data import Articles
-# from flask_mysqldb import MySQL
+from flask_mysqldb import MySQL
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from passlib.hash import sha256_crypt
 from functools import wraps
@@ -15,20 +15,20 @@ app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
 # 系统日志配置
-handler = logging.FileHandler(app.config['LOGFILE'], encoding='UTF-8')
-logging_format = logging.Formatter('%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(message)s')
-handler.setFormatter(logging_format)
-app.logger.setLevel(logging.DEBUG)
-app.logger.addHandler(handler)
+# handler = logging.FileHandler(app.config['LOGFILE'], encoding='UTF-8')
+# logging_format = logging.Formatter('%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(message)s')
+# handler.setFormatter(logging_format)
+# app.logger.setLevel(logging.DEBUG)
+# app.logger.addHandler(handler)
 
-# # Config MySQL
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = '123456'
-# app.config['MYSQL_DB'] = 'myflaskapp'
-# app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-# # init MYSQL
-# mysql = MySQL(app)
+# Config MySQL
+app.config['MYSQL_HOST'] = '10.79.3.145'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = '123456'
+app.config['MYSQL_DB'] = 'aws_db'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+# init MYSQL
+mysql = MySQL(app)
 
 
 # Index
@@ -40,20 +40,6 @@ def index():
 @app.route('/about')
 def about():
     return render_template('about.html')
-
-# Single Article
-@app.route('/article/<string:id>/')
-def article(id):
-    # Create cursor
-    cur = mysql.connection.cursor()
-
-    # Get article
-    result = cur.execute("SELECT * FROM articles WHERE id = %s", [id])
-
-    article = cur.fetchone()
-
-    return render_template('article.html', article=article)
-
 
 # Register Form Class
 class RegisterForm(Form):
@@ -157,40 +143,47 @@ def str_split(str):
 def processInput(dict):
     if 'id' in dict.keys():
         dict["id"] = int(dict["id"])
-    try:
-        # check if key exists
-        # what if it's NoneType
-        dict["maxFlightDistance"] = to_int(dict.get('maxFlightDistance', ""))
-        dict["maxFlightTime"] = to_int(dict.get('maxFlightTime',""))
-        dict["maxStrideDays"] = to_int(dict.get('maxStrideDays',""))
-        dict["banAllDays"] = to_int(dict.get('banAllDays',""))
-        dict["banType"] = str_split(dict.get('banType',""))
-        dict["carrierBlack"] = str_split(dict.get('carrierBlack',""))
-        dict["carrierWhite"] = str_split(dict.get('carrierWhite',""))
-        dict["legTransferBlack"] = str_split(dict.get('legTransferBlack',""))
-        dict["legTransferWhite"] = str_split(dict.get('legTransferWhite',""))
-        dict["notSpanCity"] = str_split(dict.get('notSpanCity',""))
-        dict["permission"] = str_split(dict.get('permission',""))
-        dict["prohibition"] = str_split(dict.get('prohibition',""))
-        dict["transferBlack"] = str_split(dict.get('transferBlack',""))
-        dict["yesSpanCity"] = str_split(dict.get('yesSpanCity',""))
-    except Exception as e:
-        app.logger.error('修改规则时部分输入为空')
-        app.logger.error('%s', e)
-        flash('输入格式错误，请检查后再试', 'danger')
-        return redirect('/dashboard')
-    else:
-        # remove keys with empty values
-        dict = {k:v for k,v in dict.items() if v != ''}
-        # for i in dict.copy():
-        #     if dict[i] == '':
-        #         dict.pop()
-        return dict
+    # try:
+    #     # check if key exists
+    #     # what if it's NoneType
+    dict["maxFlightDistance"] = to_int(dict.get('maxFlightDistance', ""))
+    dict["maxFlightTime"] = to_int(dict.get('maxFlightTime',""))
+    dict["maxStrideDays"] = to_int(dict.get('maxStrideDays',""))
+    dict["banAllDays"] = to_int(dict.get('banAllDays',""))
+    dict["banType"] = str_split(dict.get('banType',""))
+    dict["carrierBlack"] = str_split(dict.get('carrierBlack',""))
+    dict["carrierWhite"] = str_split(dict.get('carrierWhite',""))
+    dict["legTransferBlack"] = str_split(dict.get('legTransferBlack',""))
+    dict["legTransferWhite"] = str_split(dict.get('legTransferWhite',""))
+    dict["notSpanCity"] = str_split(dict.get('notSpanCity',""))
+    dict["permission"] = str_split(dict.get('permission',""))
+    dict["prohibition"] = str_split(dict.get('prohibition',""))
+    dict["transferBlack"] = str_split(dict.get('transferBlack',""))
+    dict["yesSpanCity"] = str_split(dict.get('yesSpanCity',""))
+    # except Exception as e:
+    #     app.logger.error('修改规则时部分输入为空')
+    #     app.logger.error('%s', e)
+    #     flash('输入格式错误，请检查后再试', 'danger')
+    #     return redirect('/dashboard')
+    # else:
+    # remove keys with empty values
+    dict = {k:v for k,v in dict.items() if v != ''}
+    return dict
 
 # Dashboard
 @app.route('/dashboard')
 @is_logged_in
 def dashboard():
+    # # Create cursor
+    # cur = mysql.connection.cursor()
+
+    # # Get article
+    # cur.execute("SELECT DISTINCT planeType FROM ssim")
+
+    # airport = [item['planeType'] for item in cur.fetchall()]
+    # cur.close()
+    # print(airport)
+    # print(len(airport))
     # Get rules
     try:
         response = requests.get(app.config['ENDPOINT']+app.config['GET_ALL_URL'])
@@ -222,12 +215,13 @@ def dashboard():
 def add_rule():
 
     # preprocess input text
+    print(request.form)
     dict = processInput(request.form.to_dict())
     form = json.dumps(dict)        
     header = {"Content-Type": "application/json"}    
     r = requests.post(app.config['ENDPOINT']+app.config['INSERT_URL'], headers=header, data=form)
-    
-    if r.status_code == 200:
+    resp = r.json()
+    if resp.get('ok') == True:
         app.logger.info(form)
         app.logger.info('添加规则成功')
         flash('添加规则成功', 'success')
@@ -274,7 +268,7 @@ def delete_rule(id):
     print(form)
     r = requests.delete(app.config['ENDPOINT']+app.config['DELETE_URL'], data=form)
     resp = r.json()
-    if resp["ok"] == 'True':
+    if resp.get('ok') == True:
         app.logger.info('delete rule id = %s', id)
         app.logger.info('删除规则成功')
         flash('删除规则成功', 'success')
