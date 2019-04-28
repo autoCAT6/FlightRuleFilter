@@ -133,14 +133,17 @@ def to_int(str):
             flash('输入格式错误，请检查后再试', 'danger')
         else:
             return str
-def str_split(str):
-    if str == None or str == '' or str.isspace():
-        return ''
-    else:
-        return str.split() # split多个空格，不可以是单个
+
+# def str_split(str):
+#     if str == None or str == '':
+#         return ''
+#     else:
+#         return str.split() # split多个空格，不可以是单个
 
 # Preprocess user input (add/edit)
-def processInput(dict):
+def processInput(request_form):
+
+    dict = request_form.to_dict()
     if 'id' in dict.keys():
         dict["id"] = int(dict["id"])
     # try:
@@ -150,24 +153,25 @@ def processInput(dict):
     dict["maxFlightTime"] = to_int(dict.get('maxFlightTime',""))
     dict["maxStrideDays"] = to_int(dict.get('maxStrideDays',""))
     dict["banAllDays"] = to_int(dict.get('banAllDays',""))
-    dict["banType"] = str_split(dict.get('banType',""))
-    dict["carrierBlack"] = str_split(dict.get('carrierBlack',""))
-    dict["carrierWhite"] = str_split(dict.get('carrierWhite',""))
-    dict["legTransferBlack"] = str_split(dict.get('legTransferBlack',""))
-    dict["legTransferWhite"] = str_split(dict.get('legTransferWhite',""))
-    dict["notSpanCity"] = str_split(dict.get('notSpanCity',""))
-    dict["permission"] = str_split(dict.get('permission',""))
-    dict["prohibition"] = str_split(dict.get('prohibition',""))
-    dict["transferBlack"] = str_split(dict.get('transferBlack',""))
-    dict["yesSpanCity"] = str_split(dict.get('yesSpanCity',""))
-    # except Exception as e:
-    #     app.logger.error('修改规则时部分输入为空')
-    #     app.logger.error('%s', e)
-    #     flash('输入格式错误，请检查后再试', 'danger')
-    #     return redirect('/dashboard')
-    # else:
+
+    # list type
+    dict["banType"] = request.form.getlist('banType')
+    dict["carrierBlack"] = request.form.getlist('carrierBlack')
+    dict["carrierWhite"] = request.form.getlist('carrierWhite')
+
+    dict["notSpanCity"] = request.form.getlist('notSpanCity')
+    dict["permission"] = request.form.getlist('permission')
+    dict["prohibition"] = request.form.getlist('prohibition')
+    dict["transferBlack"] = request.form.getlist('transferBlack')
+    dict["yesSpanCity"] = request.form.getlist('yesSpanCity')
+
+    dict["legTransferBlack"] = dict.get('legTransferBlack', '')
+    dict["legTransferBlack"] = dict["legTransferBlack"].split()
+    dict["legTransferWhite"] = dict.get('legTransferWhite', '')
+    dict["legTransferWhite"] = dict["legTransferWhite"].split()
+
     # remove keys with empty values
-    dict = {k:v for k,v in dict.items() if v != ''}
+    dict = {k:v for k,v in dict.items() if v != '' and v != [] and v != ['']} # 表单空输入为''
     return dict
 
 # Dashboard
@@ -178,12 +182,16 @@ def dashboard():
     # cur = mysql.connection.cursor()
 
     # # Get article
-    # cur.execute("SELECT DISTINCT planeType FROM ssim")
+    # cur.execute("SELECT DISTINCT codeShareInfo FROM ssim")
 
-    # airport = [item['planeType'] for item in cur.fetchall()]
+    # airport = [item['codeShareInfo'] for item in cur.fetchall()]
+    # result = list(filter(None, airport))
+    
+    # result = [item[0:2] for item in result]
+    # result = list(set(result))
+
     # cur.close()
-    # print(airport)
-    # print(len(airport))
+    # print(result)
     # Get rules
     try:
         response = requests.get(app.config['ENDPOINT']+app.config['GET_ALL_URL'])
@@ -198,15 +206,16 @@ def dashboard():
             return render_template('dashboard.html')
 
         rules = response.json()  
-        
-        for rule in rules:  
-            for key in rule:
-                if isinstance(rule[key], list):
-                    rule[key] = ' '.join(rule[key]) # 需要与split对应
-                if rule[key] == None: # python中空串与None不同
-                    rule[key] = ''
-            
-        return render_template('dashboard.html', rules=rules)
+
+    for rule in rules:  
+        for key in rule:
+            # if isinstance(rule[key], list): # 数组类型需要转成string用于显示
+            #     rule[key] = ' '.join(rule[key]) # 需要与split对应
+            if rule[key] == None or rule[key] == ['']: # python中空串与None不同
+                rule[key] = ''
+    
+    #print(rules)
+    return render_template('dashboard.html', rules=rules)
 
 
 # Add Rule
@@ -215,9 +224,12 @@ def dashboard():
 def add_rule():
 
     # preprocess input text
-    print(request.form)
-    dict = processInput(request.form.to_dict())
-    form = json.dumps(dict)        
+    #print(request.form)
+    # text to int
+    dict = processInput(request.form)
+
+    form = json.dumps(dict)     
+    print(form)   
     header = {"Content-Type": "application/json"}    
     r = requests.post(app.config['ENDPOINT']+app.config['INSERT_URL'], headers=header, data=form)
     resp = r.json()
@@ -241,12 +253,13 @@ def add_rule():
 def edit_rule(id):
 
     # preprocess input text
-    dict = processInput(request.form.to_dict())
+    dict = processInput(request.form)
     form = json.dumps(dict)            
     header = {"Content-Type": "application/json"}
+    print(form)
     r = requests.put(app.config['ENDPOINT']+app.config['UPDATE_URL'], headers=header, data=form)
-    
-    if r.status_code == 200:
+    resp = r.json()
+    if resp.get('ok') == True:
         app.logger.info(form)
         app.logger.info('修改规则成功')
         flash('修改规则成功', 'success')
@@ -262,11 +275,8 @@ def edit_rule(id):
 @app.route('/delete_rule/<string:id>', methods=['POST'])
 @is_logged_in
 def delete_rule(id):  
-    id = int(id)
-    dict = { "id": id }
-    form = json.dumps(dict)
-    print(form)
-    r = requests.delete(app.config['ENDPOINT']+app.config['DELETE_URL'], data=form)
+    header = {"id": id}
+    r = requests.delete(app.config['ENDPOINT']+app.config['DELETE_URL'], headers=header, data=header)
     resp = r.json()
     if resp.get('ok') == True:
         app.logger.info('delete rule id = %s', id)

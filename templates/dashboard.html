@@ -1,300 +1,38 @@
 {% extends 'layout.html' %} {% block body %}
 <link rel="stylesheet" href="../static/selectize.css">
-<style>
-    .table-wrapper {
-        background: #fff;
-        padding: 20px 25px;
-        margin: 0;
-        border-radius: 3px;
-        box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
-    }
-    
-    .table {
-        table-layout: fixed;
-        width: 100%;
-        display: block;
-        overflow-x: scroll;
-        white-space: nowrap;
-    }
-    
-    .table-title {
-        padding-bottom: 15px;
-        background: #435d7d;
-        color: #fff;
-        padding: 16px 30px;
-        margin: -20px -25px 10px;
-        border-radius: 3px 3px 0 0;
-    }
-    
-    .table-title h2 {
-        margin: 5px 0 0;
-        font-size: 24px;
-    }
-    
-    .table-title .btn-group {
-        float: right;
-    }
-    
-    .table-title .btn {
-        color: #fff;
-        float: right;
-        font-size: 13px;
-        border: none;
-        min-width: 50px;
-        border-radius: 2px;
-        border: none;
-        outline: none !important;
-        margin-left: 10px;
-    }
-    
-    .table-title .btn i {
-        float: left;
-        font-size: 21px;
-        margin-right: 5px;
-    }
-    
-    .table-title .btn span {
-        float: left;
-        margin-top: 2px;
-    }
-    
-    table.table tr th,
-    table.table tr td {
-        border-color: #e9e9e9;
-        padding: 12px 15px;
-        vertical-align: middle;
-    }
-    
-    table.table tr th:first-child {
-        width: 60px;
-    }
-    
-    table.table tr th:last-child {
-        width: 100px;
-    }
-    
-    table.table-striped tbody tr:nth-of-type(odd) {
-        background-color: #fcfcfc;
-    }
-    
-    table.table-striped.table-hover tbody tr:hover {
-        background: #f5f5f5;
-    }
-    
-    table.table th i {
-        font-size: 13px;
-        margin: 0 5px;
-        cursor: pointer;
-    }
-    
-    table.table td:last-child i {
-        opacity: 0.9;
-        font-size: 22px;
-        margin: 0 5px;
-    }
-    
-    table.table td a {
-        color: #566787;
-        display: inline-block;
-        text-decoration: none;
-        outline: none !important;
-    }
-    
-    table.table td a:hover {
-        color: #2196F3;
-    }
-    
-    table.table td a.edit {
-        color: #FFC107;
-    }
-    
-    table.table td a.delete {
-        color: #F44336;
-    }
-    
-    table.table td i {
-        font-size: 19px;
-    }
-    
-    table.table .avatar {
-        border-radius: 50%;
-        vertical-align: middle;
-        margin-right: 10px;
-    }
-    
-    .pagination {
-        float: right;
-        margin: 0 0 5px;
-    }
-    
-    .pagination li a {
-        border: none;
-        font-size: 13px;
-        min-width: 30px;
-        min-height: 30px;
-        color: #999;
-        margin: 0 2px;
-        line-height: 30px;
-        border-radius: 2px !important;
-        text-align: center;
-        padding: 0 6px;
-    }
-    
-    .pagination li a:hover {
-        color: #666;
-    }
-    
-    .pagination li.active a,
-    .pagination li.active a.page-link {
-        background: #03A9F4;
-    }
-    
-    .pagination li.active a:hover {
-        background: #0397d6;
-    }
-    
-    .pagination li.disabled i {
-        color: #ccc;
-    }
-    
-    .pagination li i {
-        font-size: 16px;
-        padding-top: 6px
-    }
-    
-    .hint-text {
-        float: left;
-        margin-top: 10px;
-        font-size: 13px;
-    }
-    /* Custom checkbox */
-    
-    .custom-checkbox {
-        position: relative;
-    }
-    
-    .custom-checkbox input[type="checkbox"] {
-        opacity: 0;
-        position: absolute;
-        margin: 5px 0 0 3px;
-        z-index: 9;
-    }
-    
-    .custom-checkbox label:before {
-        width: 18px;
-        height: 18px;
-    }
-    
-    .custom-checkbox label:before {
-        content: '';
-        margin-right: 10px;
-        display: inline-block;
-        vertical-align: text-top;
-        background: white;
-        border: 1px solid #bbb;
-        border-radius: 2px;
-        box-sizing: border-box;
-        z-index: 2;
-    }
-    
-    .custom-checkbox input[type="checkbox"]:checked+label:after {
-        content: '';
-        position: absolute;
-        left: 6px;
-        top: 3px;
-        width: 6px;
-        height: 11px;
-        border: solid #000;
-        border-width: 0 3px 3px 0;
-        transform: inherit;
-        z-index: 3;
-        transform: rotateZ(45deg);
-    }
-    
-    .custom-checkbox input[type="checkbox"]:checked+label:before {
-        border-color: #03A9F4;
-        background: #03A9F4;
-    }
-    
-    .custom-checkbox input[type="checkbox"]:checked+label:after {
-        border-color: #fff;
-    }
-    
-    .custom-checkbox input[type="checkbox"]:disabled+label:before {
-        color: #b8b8b8;
-        cursor: auto;
-        box-shadow: none;
-        background: #ddd;
-    }
-    /* Modal styles */
-    
-    .modal .modal-dialog {
-        max-width: 800px;
-    }
-    
-    .modal .modal-header,
-    .modal .modal-body,
-    .modal .modal-footer {
-        padding: 20px 30px;
-    }
-    
-    .modal .modal-content {
-        border-radius: 3px;
-    }
-    
-    .modal .modal-title {
-        display: inline-block;
-    }
-    
-    .modal .modal-footer {
-        background: #ecf0f1;
-        border-radius: 0 0 3px 3px;
-    }
-    
-    .container-fluid {
-        padding: 0
-    }
-    
-    .modal .form-control {
-        border-radius: 4px;
-        box-shadow: none;
-        border-color: #dddddd;
-        margin-bottom: 5px;
-    }
-    /* .modal textarea.form-control {
-        resize: vertical;
-    } */
-    
-    .modal .btn {
-        border-radius: 2px;
-        min-width: 60px;
-    }
-    
-    .modal .modal-body label {
-        font-weight: normal;
-    }
-</style>
+<link rel="stylesheet" href="../static/dashboard.css">
 <script src="../static/selectize.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         var airports = ["AAT", "ACX", "ADL", "AKL", "AKU", "ALA", "AMS", "AOG", "AQG", "ARN", "ASB", "ATH", "ATL", "AUH", "AZM", "BAR", "BAV", "BCN", "BFJ", "BHD", "BHX", "BHY", "BKI", "BKK", "BLQ", "BNA", "BNE", "BOD", "BOS", "BPE", "BPL", "BRE", "BRI", "BRU", "BSD", "BUF", "BWI", "BZN", "CAN", "CBR", "CDG", "CEB", "CGD", "CGK", "CGO", "CGQ", "CHC", "CHG", "CIH", "CJJ", "CJU", "CKG", "CLE", "CLT", "CMB", "CNS", "CNX", "CPH", "CSX", "CTA", "CTS", "CTU", "CVG", "CXR", "CZX", "DAC", "DAD", "DAR", "DAT", "DBC", "DBL", "DCA", "DCY", "DDB", "DDG", "DDV", "DEL", "DEN", "DFW", "DHU", "DIG", "DLC", "DLU", "DNH", "DPS", "DQA", "DSN", "DTW", "DUS", "DXB", "DYG", "DYU", "EBB", "EDI", "EJJ", "EJQ", "ENH", "ENY", "EWR", "EWV", "FCO", "FII", "FLL", "FLR", "FOC", "FRA", "FRU", "FSA", "FUG", "FYN", "GEG", "GGX", "GKW", "GLA", "GMP", "GVA", "GYD", "GYS", "HAJ", "HAK", "HAM", "HAN", "HBA", "HBP", "HBV", "HDG", "HEK", "HEL", "HET", "HFE", "HGH", "HHS", "HIA", "HKG", "HKT", "HLD", "HMI", "HND", "HNL", "HNY", "HNZ", "HPG", "HRB", "HSD", "HSN", "HTN", "HUZ", "HYN", "HZG", "IAD", "IAH", "ICN", "IKA", "IKT", "INC", "IND", "IQM", "ISB", "IST", "IUO", "JAX", "JBD", "JED", "JFK", "JGN", "JGS", "JHG", "JIQ", "JJJ", "JJL", "JJN", "JLL", "JMU", "JNG", "JNZ", "JQJ", "JSJ", "JUH", "JXA", "JYQ", "KCA", "KFI", "KHG", "KHH", "KHN", "KIJ", "KIX", "KJI", "KLJ", "KMG", "KOW", "KRL", "KRY", "KTM", "KUL", "KWE", "KWL", "KZZ", "LAS", "LAX", "LBD", "LDS", "LED", "LFQ", "LGA", "LGK", "LHE", "LHR", "LHW", "LIM", "LIS", "LJG", "LLB", "LLD", "LLQ", "LNJ", "LNL", "LPF", "LQP", "LQQ", "LUM", "LUN", "LXA", "LYA", "LYG", "LYI", "LYS", "LZH", "LZO", "LZY", "MAD", "MAN", "MCO", "MDG", "MEL", "MEM", "MEX", "MFM", "MIA", "MIG", "MLE", "MNL", "MRS", "MSN", "MSP", "MSY", "MUC", "MXP", "MXZ", "NAO", "NAP", "NBO", "NBS", "NCE", "NCL", "NDG", "NGB", "NGO", "NHG", "NKG", "NKJ", "NLH", "NLT", "NNG", "NNY", "NRT", "NTE", "NUE", "NYP", "OGG", "OHE", "ORD", "OSL", "OSQ", "PDX", "PEK", "PEN", "PER", "PHL", "PHX", "PIT", "PNH", "PQC", "PRG", "PUS", "PVG", "PXG", "PZI", "QSZ", "RDU", "REP", "RGN", "RIC", "RIZ", "RLZ", "RQA", "RUH", "SAN", "SCL", "SEA", "SFO", "SGN", "SHA", "SHE", "SHF", "SIN", "SJC", "SJW", "SLC", "SMF", "STR", "SVO", "SWA", "SYD", "SYG", "SYM", "SYR", "SYX", "SZV", "SZX", "TAE", "TAO", "TAS", "TBS", "TCG", "TCZ", "TEN", "TGO", "TGX", "THJ", "TLQ", "TLS", "TMV", "TNA", "TNH", "TOY", "TPA", "TPE", "TRN", "TSE", "TSN", "TTV", "TTZ", "TUS", "TVC", "TWC", "TXL", "TXN", "TYN", "UIG", "URC", "UYN", "VBL", "VCE", "VIE", "VRN", "VTE", "VVO", "VWA", "VWB", "WAW", "WDS", "WEH", "WMT", "WNH", "WNZ", "WUH", "WUT", "WUX", "WZE", "XFN", "XIC", "XIY", "XMN", "XNN", "XUZ", "XYW", "YBP", "YCU", "YDD", "YEG", "YHZ", "YIC", "YIH", "YIN", "YIW", "YLW", "YNJ", "YNT", "YNZ", "YOW", "YQB", "YQR", "YSQ", "YTY", "YUG", "YUL", "YUS", "YVR", "YWG", "YXE", "YXS", "YYC", "YYG", "YYJ", "YYT", "YYZ", "ZAT", "ZHA", "ZIU", "ZIX", "ZNG", "ZRH", "ZUH", "ZYI", "GRR", "LQS", "QHX", "WEC", "WXJ"]
         var planes = ["738", "E90", "73G", "7M8", "319", "73H", "333", "332", "789", "73J", "73W", "E75", "E95", "32S", "321", "320", "77W", "772", "380", "739", "32A", "32B", "757", "752", "753", "76W", "77L", "764", "781", "BUS", "E70", "318", "32Q", "ERD", "CR9", "E7W", "717", "CRJ", "75W", "737", "788", "787", "LMO", "TRN", "359", "744", "DH3", "330", "CR7", "221", "763", "M90", "773", "777", "32N", "SU9", "32L", "733", "339", "AR8", "DH4", "736"]
-
+        var carriers = ['DL', 'SV', 'AF', 'WS', 'MU', 'VN', 'KL', 'MF', 'OQ', 'KQ', 'EY', 'GA', 'AZ', 'OK', 'KE', 'PK', 'CI', 'JL', 'AA', 'SU', 'OZ', 'QF', 'AE', 'BA']
         $.each(airports, function(index, value) {
-            $('#select-transit')
+            $('.select-transit')
                 .append($("<option></option>")
                     .attr("value", value)
                     .text(value));
         });
 
-        $('#select-transit').selectize({
+        $.each(planes, function(index, value) {
+            $('.select-plane')
+                .append($("<option></option>")
+                    .attr("value", value)
+                    .text(value));
+        });
+
+        $.each(carriers, function(index, value) {
+            $('.select-carrier')
+                .append($("<option></option>")
+                    .attr("value", value)
+                    .text(value));
+        });
+
+        $('.multi-select').selectize({
+            persist: false,
+            create: false,
             plugins: ['remove_button']
         });
-
-        $('.btn').click(function() {
-
-        });
-
 
     });
 </script>
@@ -339,8 +77,9 @@
                 <th>承运人白名单</th>
                 <th>承运人黑名单</th>
                 <th>航段中转点白名单</th>
-                <th>中转点黑名单</th>
                 <th>航段中转点黑名单</th>
+                <th>中转点黑名单</th>
+
                 <th></th>
 
             </tr>
@@ -368,22 +107,23 @@
                 <td>{{rule.maxFlightTime}} </td>
                 <td>{{rule.maxStopPoint}}</td>
                 <td>{{rule.maxTransfer}}</td>
-                <td>{{rule.permission}}</td>
-                <td>{{rule.prohibition}}</td>
-                <td>{{rule.yesSpanCity}}</td>
-                <td>{{rule.notSpanCity}}</td>
+                <td>{% for item in rule.permission %} {{item}} {% endfor %}</td>
+                <td>{% for item in rule.prohibition %} {{item}} {% endfor %}</td>
+                <td>{% for item in rule.yesSpanCity %} {{item}} {% endfor %}</td>
+                <td>{% for item in rule.notSpanCity %} {{item}} {% endfor %}</td>
                 <td>{{rule.maxStrideDays}}</td>
                 {% if rule.banAllDays == 1 %}
                 <td>是</td>
                 {% else %}
                 <td>否</td>
                 {% endif %}
-                <td>{{rule.banType}}</td>
-                <td>{{rule.carrierWhite}}</td>
-                <td>{{rule.carrierBlack}}</td>
-                <td>{{rule.legTransferWhite}}</td>
-                <td>{{rule.transferBlack}}</td>
-                <td>{{rule.legTransferBlack}}</td>
+
+                <td>{% for item in rule.banType %} {{item}} {% endfor %}</td>
+                <td>{% for item in rule.carrierWhite %} {{item}} {% endfor %}</td>
+                <td>{% for item in rule.carrierBlack %} {{item}} {% endfor %}</td>
+                <td>{% for item in rule.legTransferWhite %} {{item}} {% endfor %}</td>
+                <td>{% for item in rule.legTransferBlack %} {{item}} {% endfor %}</td>
+                <td>{% for item in rule.transferBlack %} {{item}} {% endfor %}</td>
                 <td>
                     <a class="edit" data-toggle="modal" data-target="#editRuleModal{{ rule.id }}"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                     <a class="delete" data-toggle="modal" data-target="#deleteRuleModal{{ rule.id }}"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
@@ -405,6 +145,7 @@
                                                 <input type="number" name="id" value="{{rule.id}}" readonly="readonly" class="form-control">
                                             </div>
                                         </div>
+
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>min绕行率</label>
@@ -451,11 +192,20 @@
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>允许跨天逗留城市</label>
-                                                <input type="text" name="yesSpanCity" value="{{rule.yesSpanCity}}" class="form-control">
+                                                <select class="select-transit multi-select" name="yesSpanCity" multiple>
+                                                    {% for selection in rule.yesSpanCity %}
+                                                    <option value={{selection}} selected>{{selection}}</option>
+                                                    {% endfor %}
+                                                </select>
                                             </div>
+
                                             <div class="col-sm-6">
                                                 <label>不允许跨逗留天城市</label>
-                                                <input type="text" name="notSpanCity" value="{{rule.notSpanCity}}" class="form-control">
+                                                <select class="select-transit multi-select" name="notSpanCity" multiple>
+                                                    {% for selection in rule.notSpanCity %}
+                                                    <option value={{selection}} selected>{{selection}}</option>
+                                                    {% endfor %}
+                                                </select>
                                             </div>
                                         </div>
 
@@ -490,33 +240,64 @@
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>禁止机型</label>
-                                                <input type="text" name="banType" value="{{rule.banType}}" class="form-control">
+                                                <!-- <input type="text" name="banType" value="{{rule.banType}}" class="form-control"> -->
+                                                <select class="select-plane multi-select" name="banType" multiple>
+                                                    {% for selection in rule.banType %}
+                                                    <option value={{selection}} selected>{{selection}}</option>
+                                                    {% endfor %}
+                                                </select>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>中转点黑名单</label>
-                                                <input type="text" name="transferBlack" value="{{rule.transferBlack}}" class="form-control">
+                                                <!-- <input type="text" name="transferBlack" value="{{rule.transferBlack}}" class="form-control"> -->
+                                                <select class="select-transit multi-select" name="transferBlack" multiple>
+                                                    {% for selection in rule.transferBlack %}
+                                                    <option value={{selection}} selected>{{selection}}</option>
+                                                    {% endfor %}
+                                                </select>
                                             </div>
+
                                         </div>
 
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>承运人白名单</label>
-                                                <input type="text" name="carrierWhite" value="{{rule.carrierWhite}}" class="form-control">
+                                                <select class="select-carrier multi-select" name="carrierWhite" multiple>
+                                                    {% for selection in rule.carrierWhite %}
+                                                    <option value={{selection}} selected>{{selection}}</option>
+                                                    {% endfor %}
+                                                </select>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>承运人黑名单</label>
-                                                <input type="text" name="carrierBlack" value="{{rule.carrierBlack}}" class="form-control">
+                                                <select class="select-carrier multi-select" name="carrierBlack" multiple>
+                                                    {% for selection in rule.carrierBlack %}
+                                                    <option value={{selection}} selected>{{selection}}</option>
+                                                    {% endfor %}
+                                                </select>
                                             </div>
                                         </div>
 
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>航段中转点白名单</label>
-                                                <input type="text" name="legTransferWhite" value="{{rule.legTransferWhite}}" class="form-control">
+
+                                                <!-- <input type="text" name="legTransferWhite" value="{{rule.legTransferWhite}}" class="form-control"> -->
+                                                <!-- <select class="select-transit multi-select" name="legTransferWhite" multiple>
+                                                    {% for selection in rule.legTransferWhite %}
+                                                    <option value={{selection}} selected>{{selection}}</option>
+                                                    {% endfor %}
+                                                </select> -->
+                                                <input type="text" name="legTransferWhite" value="{{rule.legTransferWhite|join(' ')}}" class="form-control">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>航段中转点黑名单</label>
-                                                <input type="text" name="legTransferBlack" value="{{rule.legTransferBlack}}" class="form-control">
+                                                <!-- <select class="select-transit multi-select" name="legTransferBlack" multiple>
+                                                    {% for selection in rule.legTransferBlack %}
+                                                    <option value={{selection}} selected>{{selection}}</option>
+                                                    {% endfor %}
+                                                </select> -->
+                                                <input type="text" name="legTransferBlack" value="{{rule.legTransferBlack|join(' ')}}" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -583,6 +364,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
+                        <div class="col-sm-12">
+                            <label>类型</label>
+                            <select name="type" class="form-control">
+                                <option value="1">全局配置</option>
+                                <option value="0" selected>局部配置</option>     
+                            </select>
+                        </div>
+
                         <div class="col-sm-6">
                             <label>min绕行率</label>
                             <input type="text" name="minRate" class="form-control">
@@ -617,11 +406,11 @@
                         </div>
                         <div class="col-sm-6">
                             <label>允许跨天逗留城市</label>
-                            <input type="text" name="yesSpanCity" class="form-control">
+                            <select class="select-transit multi-select" name="yesSpanCity" multiple="multiple"></select>
                         </div>
                         <div class="col-sm-6">
                             <label>不允许跨逗留天城市</label>
-                            <input type="text" name="notSpanCity" class="form-control">
+                            <select class="select-transit multi-select" name="notSpanCity" multiple="multiple"></select>
                         </div>
                         <div class="col-sm-6">
                             <label>max跨天数</label>
@@ -637,27 +426,25 @@
                         </div>
                         <div class="col-sm-6">
                             <label>禁止机型</label>
-                            <input type="text" name="banType" class="form-control">
-                        </div>
-
-                        <div class="col-sm-6">
-                            <label>承运人白名单</label>
-                            <input type="text" name="carrierWhite" class="form-control">
-                        </div>
-                        <div class="col-sm-6">
-                            <label>承运人黑名单</label>
-                            <input type="text" name="carrierBlack" class="form-control">
-                        </div>
-                        <div class="col-sm-6">
-                            <label>航段中转点白名单</label>
-                            <select id="select-transit" name="legTransferWhite" multiple="multiple">
-                            </select>
-
+                            <select class="select-plane multi-select" name="banType" multiple="multiple"></select>
                         </div>
                         <div class="col-sm-6">
                             <label>中转点黑名单</label>
-                            <input type="text" name="transferBlack" class="form-control">
+                            <select class="select-transit multi-select" name="transferBlack" multiple="multiple"></select>
                         </div>
+                        <div class="col-sm-6">
+                            <label>承运人白名单</label>
+                            <select class="select-carrier multi-select" name="carrierWhite" multiple="multiple"></select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>承运人黑名单</label>
+                            <select class="select-carrier multi-select" name="carrierBlack" multiple="multiple"></select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>航段中转点白名单</label>
+                            <input type="text" name="legTransferWhite" class="form-control">
+                        </div>
+
                         <div class="col-sm-6">
                             <label>航段中转点黑名单</label>
                             <input type="text" name="legTransferBlack" class="form-control">
