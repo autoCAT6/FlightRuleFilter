@@ -15,11 +15,11 @@ app = Flask(__name__)
 app.config.from_pyfile('config.py')
 
 # 系统日志配置
-# handler = logging.FileHandler(app.config['LOGFILE'], encoding='UTF-8')
-# logging_format = logging.Formatter('%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(message)s')
-# handler.setFormatter(logging_format)
-# app.logger.setLevel(logging.DEBUG)
-# app.logger.addHandler(handler)
+handler = logging.FileHandler(app.config['LOGFILE'], encoding='UTF-8')
+logging_format = logging.Formatter('%(asctime)s - %(levelname)s - %(filename)s - %(funcName)s - %(message)s')
+handler.setFormatter(logging_format)
+app.logger.setLevel(logging.DEBUG)
+app.logger.addHandler(handler)
 
 # Config MySQL
 app.config['MYSQL_HOST'] = '10.79.3.145'
@@ -149,6 +149,7 @@ def processInput(request_form):
     # try:
     #     # check if key exists
     #     # what if it's NoneType
+    dict["type"] = to_int(dict.get("type","0"))
     dict["maxFlightDistance"] = to_int(dict.get('maxFlightDistance', ""))
     dict["maxFlightTime"] = to_int(dict.get('maxFlightTime',""))
     dict["maxStrideDays"] = to_int(dict.get('maxStrideDays',""))

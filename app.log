@@ -251,3 +251,7 @@ TemplateSyntaxError: unexpected char u'\u662f' at 9084
 2019-04-26 14:59:49,652 - INFO - app.py - add_rule - {"banAllDays": 0, "legTranferWhite": "ACX"}
 2019-04-26 14:59:49,654 - INFO - app.py - add_rule - 添加规则成功
 2019-04-26 15:02:15,924 - ERROR - app.py - add_rule - 添加规则失败
+2019-04-28 17:29:05,636 - INFO - app.py - edit_rule - {"id": 65, "minRate": "0.0", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxStrideDays": 0, "banAllDays": 0, "legTransferWhite": ["A-B:C", "D-E:F"], "type": 0}
+2019-04-28 17:29:05,638 - INFO - app.py - edit_rule - 修改规则成功
+2019-04-28 18:21:13,174 - INFO - app.py - add_rule - {"type": 0, "yesSpanCity": ["AKU"], "banAllDays": 0}
+2019-04-28 18:21:13,176 - INFO - app.py - add_rule - 添加规则成功
