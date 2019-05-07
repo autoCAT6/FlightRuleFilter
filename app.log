@@ -255,3 +255,25 @@ TemplateSyntaxError: unexpected char u'\u662f' at 9084
 2019-04-28 17:29:05,638 - INFO - app.py - edit_rule - 修改规则成功
 2019-04-28 18:21:13,174 - INFO - app.py - add_rule - {"type": 0, "yesSpanCity": ["AKU"], "banAllDays": 0}
 2019-04-28 18:21:13,176 - INFO - app.py - add_rule - 添加规则成功
+2019-05-07 14:10:58,980 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 14:11:05,998 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 14:13:36,095 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 15:09:44,302 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 15:13:16,144 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 15:13:34,207 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 15:13:35,918 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 15:16:52,923 - INFO - app.py - add_rule - {"type": 0, "banAllDays": 0, "banType": ["E90"]}
+2019-05-07 15:16:52,924 - INFO - app.py - add_rule - 添加规则成功
+2019-05-07 15:39:23,898 - INFO - app.py - add_rule - {"type": 0, "banAllDays": 0, "transferBlack": ["CMB"]}
+2019-05-07 15:39:23,900 - INFO - app.py - add_rule - 添加规则成功
+2019-05-07 16:02:17,573 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 16:04:31,476 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 16:04:32,897 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 16:06:36,544 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 16:11:25,155 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 16:11:38,482 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 16:12:15,039 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-07 16:18:46,837 - INFO - app.py - add_rule - {"type": 0, "maxTransferTime": "222", "banAllDays": 0}
+2019-05-07 16:18:46,838 - INFO - app.py - add_rule - 添加规则成功
+2019-05-07 16:19:01,080 - INFO - app.py - add_rule - {"type": 0, "yesSpanCity": ["ADL"], "banAllDays": 0}
+2019-05-07 16:19:01,080 - INFO - app.py - add_rule - 添加规则成功

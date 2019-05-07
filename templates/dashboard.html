@@ -67,6 +67,7 @@
                 <th>max飞行时间 </th>
                 <th>max经停点 </th>
                 <th>max中转点</th>
+                <th>max中转时间</th>
                 <th>同城机场允许中转</th>
                 <th>同城机场禁止中转</th>
                 <th>允许跨天逗留城市</th>
@@ -107,6 +108,7 @@
                 <td>{{rule.maxFlightTime}} </td>
                 <td>{{rule.maxStopPoint}}</td>
                 <td>{{rule.maxTransfer}}</td>
+                <th>{{rule.maxTransferTime}}</th>
                 <td>{% for item in rule.permission %} {{item}} {% endfor %}</td>
                 <td>{% for item in rule.prohibition %} {{item}} {% endfor %}</td>
                 <td>{% for item in rule.yesSpanCity %} {{item}} {% endfor %}</td>
@@ -177,6 +179,13 @@
                                                 <label>max中转点</label>
                                                 <input type="text" name="maxTransfer" value="{{rule.maxTransfer}}" class="form-control">
                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <label>max中转时间</label>
+                                                <input type="text" name="maxTransferTime" value="{{rule.maxTransferTime}}" class="form-control">
+                                            </div>
+                                            
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-6">
@@ -395,6 +404,10 @@
                         <div class="col-sm-6">
                             <label>max中转点</label>
                             <input type="text" name="maxTransfer" class="form-control">
+                        </div>
+                        <div class="col-sm-12">
+                            <label>max中转时间</label>
+                            <input type="text" name="maxTransferTime" class="form-control">
                         </div>
                         <div class="col-sm-6">
                             <label>同城机场允许中转</label>
