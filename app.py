@@ -146,9 +146,7 @@ def processInput(request_form):
     dict = request_form.to_dict()
     if 'id' in dict.keys():
         dict["id"] = int(dict["id"])
-    # try:
-    #     # check if key exists
-    #     # what if it's NoneType
+
     dict["type"] = to_int(dict.get("type","0"))
     dict["maxFlightDistance"] = to_int(dict.get('maxFlightDistance', ""))
     dict["maxFlightTime"] = to_int(dict.get('maxFlightTime',""))
@@ -208,7 +206,10 @@ def dashboard():
 
         rules = response.json()  
 
-    for rule in rules:  
+    globalSet = False
+    for rule in rules:
+        if rule['type'] ==  1:
+            globalSet = True 
         for key in rule:
             # if isinstance(rule[key], list): # 数组类型需要转成string用于显示
             #     rule[key] = ' '.join(rule[key]) # 需要与split对应
@@ -216,7 +217,7 @@ def dashboard():
                 rule[key] = ''
     
     #print(rules)
-    return render_template('dashboard.html', rules=rules)
+    return render_template('dashboard.html', rules=rules, globalSet=globalSet)
 
 
 # Add Rule

@@ -277,3 +277,272 @@ TemplateSyntaxError: unexpected char u'\u662f' at 9084
 2019-05-07 16:18:46,838 - INFO - app.py - add_rule - 添加规则成功
 2019-05-07 16:19:01,080 - INFO - app.py - add_rule - {"type": 0, "yesSpanCity": ["ADL"], "banAllDays": 0}
 2019-05-07 16:19:01,080 - INFO - app.py - add_rule - 添加规则成功
+2019-05-07 16:44:58,538 - INFO - app.py - add_rule - {"type": 0, "maxTransferTime": "100", "banAllDays": 0}
+2019-05-07 16:44:58,539 - INFO - app.py - add_rule - 添加规则成功
+2019-05-07 17:34:04,663 - INFO - app.py - edit_rule - {"id": 61, "minRate": "0.0", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "111", "maxStrideDays": 0, "banAllDays": 0, "banType": ["E90", "7M8", "73H", "333"], "transferBlack": ["AKL", "AKU", "AMS", "AOG", "ADL"], "carrierWhite": ["AF", "SV"], "carrierBlack": ["WS", "AF"], "type": 0}
+2019-05-07 17:34:04,667 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-07 17:35:30,800 - INFO - app.py - edit_rule - {"id": 62, "minRate": "1.2", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-07 17:35:30,801 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-08 16:27:43,098 - INFO - app.py - edit_rule - {"id": 61, "minRate": "1.2", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "111", "maxStrideDays": 0, "banAllDays": 0, "banType": ["E90", "7M8", "73H", "333"], "transferBlack": ["AKL", "AKU", "AMS", "AOG", "ADL"], "carrierWhite": ["AF", "SV"], "carrierBlack": ["WS", "AF"], "type": 0}
+2019-05-08 16:27:43,106 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-08 17:54:00,289 - ERROR - app.py - log_exception - Exception on /edit_rule/61 [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 2, in raise_from
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1321, in getresponse
+    response.begin()
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 296, in begin
+    version, status, reason = self._read_status()
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 265, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 368, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/packages/six.py", line 685, in reraise
+    raise value.with_traceback(tb)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 384, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 2, in raise_from
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 380, in _make_request
+    httplib_response = conn.getresponse()
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1321, in getresponse
+    response.begin()
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 296, in begin
+    version, status, reason = self._read_status()
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 265, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 108, in wrap
+    return f(*args, **kwargs)
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 264, in edit_rule
+    r = requests.put(app.config['ENDPOINT']+app.config['UPDATE_URL'], headers=header, data=form)
+  File "/usr/local/lib/python3.7/site-packages/requests/api.py", line 131, in put
+    return request('put', url, data=data, **kwargs)
+  File "/usr/local/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/local/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/lib/python3.7/site-packages/requests/adapters.py", line 498, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2019-05-09 15:54:09,535 - INFO - app.py - edit_rule - {"id": 61, "minRate": "1.3", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "111", "maxStrideDays": 0, "banAllDays": 0, "banType": ["E90", "7M8", "73H", "333"], "transferBlack": ["AKL", "AKU", "AMS", "AOG", "ADL"], "carrierWhite": ["AF", "SV"], "carrierBlack": ["WS", "AF"], "type": 0}
+2019-05-09 15:54:09,539 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 15:57:35,557 - INFO - app.py - edit_rule - {"id": 61, "minRate": "2", "maxRate": "0.0", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "111", "maxStrideDays": 0, "banAllDays": 0, "banType": ["E90", "7M8", "73H", "333"], "transferBlack": ["AKL", "AKU", "AMS", "AOG", "ADL"], "carrierWhite": ["AF", "SV"], "carrierBlack": ["WS", "AF"], "type": 0}
+2019-05-09 15:57:35,558 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:19:17,839 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 16:19:52,626 - INFO - app.py - edit_rule - {"id": 61, "minRate": "2.0", "maxRate": "3.0", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "111", "maxStrideDays": 0, "banAllDays": 0, "banType": ["E90", "7M8", "73H", "333"], "transferBlack": ["AKL", "AKU", "AMS", "AOG", "ADL"], "carrierWhite": ["AF", "SV"], "carrierBlack": ["WS", "AF"], "type": 0}
+2019-05-09 16:19:52,627 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:22:06,567 - INFO - app.py - edit_rule - {"id": 62, "minRate": "1.2", "maxRate": "2", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 16:22:06,572 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:23:42,670 - INFO - app.py - edit_rule - {"id": 62, "minRate": "1.2", "maxRate": "1.5", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 16:23:42,672 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:25:59,973 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 16:26:22,188 - INFO - app.py - edit_rule - {"id": 61, "minRate": "2.0", "maxRate": "4", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "111", "maxStrideDays": 0, "banAllDays": 0, "banType": ["E90", "7M8", "73H", "333"], "transferBlack": ["AKL", "AKU", "AMS", "AOG", "ADL"], "carrierWhite": ["AF", "SV"], "carrierBlack": ["WS", "AF"], "type": 0}
+2019-05-09 16:26:22,189 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:31:13,576 - INFO - app.py - edit_rule - {"id": 62, "minRate": "1.2", "maxRate": "2", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 16:31:13,579 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:31:50,162 - INFO - app.py - edit_rule - {"id": 63, "minRate": "0.0", "maxRate": "1", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 16:31:50,162 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:32:46,786 - INFO - app.py - edit_rule - {"id": 62, "minRate": "1.2", "maxRate": "3", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 16:32:46,787 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:36:14,853 - INFO - app.py - edit_rule - {"id": 62, "minRate": "1.2", "maxRate": "2", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 16:36:14,854 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:41:59,839 - INFO - app.py - edit_rule - {"id": 61, "minRate": "2.0", "maxRate": "3", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "111", "maxStrideDays": 0, "banAllDays": 0, "banType": ["E90", "7M8", "73H", "333"], "transferBlack": ["AKL", "AKU", "AMS", "AOG", "ADL"], "carrierWhite": ["AF", "SV"], "carrierBlack": ["WS", "AF"], "type": 0}
+2019-05-09 16:41:59,843 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:44:22,514 - INFO - app.py - edit_rule - {"id": 64, "minRate": "0.0", "maxRate": "2", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 16:44:22,517 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:49:24,430 - INFO - app.py - edit_rule - {"id": 63, "minRate": "0.0", "maxRate": "1.0", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 16:49:24,434 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:49:42,316 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 16:49:48,501 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 16:49:50,173 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 16:50:53,097 - INFO - app.py - edit_rule - {"id": 63, "minRate": "0.0", "maxRate": "2.5", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 16:50:53,103 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:51:02,831 - INFO - app.py - edit_rule - {"id": 61, "minRate": "2.0", "maxRate": "3.0", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "111", "maxStrideDays": 0, "banAllDays": 0, "banType": ["E90", "7M8", "73H", "333"], "transferBlack": ["AKL", "AKU", "AMS", "AOG", "ADL"], "carrierWhite": ["AF", "SV"], "carrierBlack": ["WS", "AF"], "type": 0}
+2019-05-09 16:51:02,832 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:51:19,268 - INFO - app.py - edit_rule - {"id": 61, "minRate": "2.0", "maxRate": "3.0", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "111", "maxStrideDays": 0, "banAllDays": 0, "banType": ["E90", "7M8", "73H", "333"], "transferBlack": ["AKL", "AKU", "AMS", "AOG", "ADL"], "carrierWhite": ["AF", "SV"], "carrierBlack": ["WS", "AF"], "type": 0}
+2019-05-09 16:51:19,269 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:55:37,589 - INFO - app.py - edit_rule - {"id": 64, "minRate": "0.0", "maxRate": "3", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 16:55:37,591 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 16:57:54,436 - INFO - app.py - edit_rule - {"id": 63, "minRate": "0.0", "maxRate": "1", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 16:57:54,441 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 17:19:08,156 - ERROR - app.py - log_exception - Exception on /edit_rule/65 [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 159, in _new_conn
+    (self._dns_host, self.port), self.timeout, **extra_kw)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 80, in create_connection
+    raise err
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/connection.py", line 70, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 600, in urlopen
+    chunked=chunked)
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 354, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1229, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1275, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1224, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 1016, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python/3.7.3/Frameworks/Python.framework/Versions/3.7/lib/python3.7/http/client.py", line 956, in send
+    self.connect()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 181, in connect
+    conn = self._new_conn()
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connection.py", line 168, in _new_conn
+    self, "Failed to establish a new connection: %s" % e)
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x10bbb01d0>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/requests/adapters.py", line 449, in send
+    timeout=timeout
+  File "/usr/local/lib/python3.7/site-packages/urllib3/connectionpool.py", line 638, in urlopen
+    _stacktrace=sys.exc_info()[2])
+  File "/usr/local/lib/python3.7/site-packages/urllib3/util/retry.py", line 399, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=8070): Max retries exceeded with url: /rule/doUpdateObject (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10bbb01d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/usr/local/lib/python3.7/site-packages/flask/_compat.py", line 35, in reraise
+    raise value
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.7/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 108, in wrap
+    return f(*args, **kwargs)
+  File "/Users/xiyanzhi/workspace/myflaskapp/app.py", line 264, in edit_rule
+    r = requests.put(app.config['ENDPOINT']+app.config['UPDATE_URL'], headers=header, data=form)
+  File "/usr/local/lib/python3.7/site-packages/requests/api.py", line 131, in put
+    return request('put', url, data=data, **kwargs)
+  File "/usr/local/lib/python3.7/site-packages/requests/api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/local/lib/python3.7/site-packages/requests/sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/local/lib/python3.7/site-packages/requests/sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/local/lib/python3.7/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8070): Max retries exceeded with url: /rule/doUpdateObject (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10bbb01d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2019-05-09 17:19:56,259 - INFO - app.py - edit_rule - {"id": 63, "minRate": "0.0", "maxRate": "2.1", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 17:19:56,260 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 17:20:30,184 - INFO - app.py - edit_rule - {"id": 63, "minRate": "0.0", "maxRate": "2.1", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 17:20:30,186 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 17:28:14,266 - INFO - app.py - edit_rule - {"id": 64, "minRate": "0.0", "maxRate": "2.1", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 17:28:14,270 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 17:28:14,393 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 17:28:35,285 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 17:28:38,175 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 17:28:54,191 - INFO - app.py - edit_rule - {"id": 64, "minRate": "0.0", "maxRate": "2.2", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 17:28:54,193 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 17:30:06,672 - INFO - app.py - edit_rule - {"id": 63, "minRate": "0.0", "maxRate": "2.3", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 17:30:06,674 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 17:34:26,199 - INFO - app.py - edit_rule - {"id": 62, "minRate": "1.2", "maxRate": "2.9", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 17:34:26,200 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 17:35:26,337 - INFO - app.py - edit_rule - {"id": 66, "minRate": "0.0", "maxRate": "1", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 17:35:26,338 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 17:54:16,110 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 17:54:18,106 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 17:54:21,448 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 17:54:24,324 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 17:54:26,598 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 17:54:26,742 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 17:54:27,655 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 17:54:59,460 - INFO - app.py - edit_rule - {"id": 64, "minRate": "0.0", "maxRate": "2.9", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 17:54:59,461 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 17:59:13,870 - INFO - app.py - edit_rule - {"id": 62, "minRate": "1.2", "maxRate": "3", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 17:59:13,872 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 18:11:11,350 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 18:11:13,054 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-09 18:11:26,468 - INFO - app.py - edit_rule - {"id": 64, "minRate": "0.0", "maxRate": "1", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 18:11:26,469 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 18:15:27,135 - INFO - app.py - edit_rule - {"id": 65, "minRate": "0.0", "maxRate": "1", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "legTransferWhite": ["A-B:C", "D-E:F"], "type": 0}
+2019-05-09 18:15:27,140 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 18:15:55,106 - INFO - app.py - edit_rule - {"id": 65, "minRate": "0.0", "maxRate": "2", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "legTransferWhite": ["A-B:C", "D-E:F"], "type": 0}
+2019-05-09 18:15:55,107 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 18:16:16,357 - INFO - app.py - edit_rule - {"id": 65, "minRate": "0.0", "maxRate": "2.11", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "legTransferWhite": ["A-B:C", "D-E:F"], "type": 0}
+2019-05-09 18:16:16,358 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 18:24:43,629 - INFO - app.py - edit_rule - {"id": 64, "minRate": "0.0", "maxRate": "3.1", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-09 18:24:43,632 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-09 18:30:09,148 - INFO - app.py - edit_rule - {"id": 65, "minRate": "0.0", "maxRate": "2.13", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "legTransferWhite": ["A-B:C", "D-E:F"], "type": 0}
+2019-05-09 18:30:09,150 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-10 09:26:08,102 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-10 09:26:11,579 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-10 09:26:28,969 - INFO - app.py - edit_rule - {"id": 63, "minRate": "0.0", "maxRate": "2.2", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-10 09:26:28,971 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-10 09:28:46,110 - INFO - app.py - edit_rule - {"id": 63, "minRate": "0.0", "maxRate": "3", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-10 09:28:46,111 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-10 09:31:24,444 - INFO - app.py - edit_rule - {"id": 64, "minRate": "0.0", "maxRate": "3.2", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-10 09:31:24,445 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-10 09:34:11,052 - INFO - app.py - edit_rule - {"id": 65, "minRate": "0.0", "maxRate": "5", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "legTransferWhite": ["A-B:C", "D-E:F"], "type": 0}
+2019-05-10 09:34:11,054 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-10 09:35:56,583 - INFO - app.py - edit_rule - {"id": 64, "minRate": "0.0", "maxRate": "5", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-10 09:35:56,584 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-10 09:44:01,665 - INFO - app.py - edit_rule - {"id": 65, "minRate": "0.0", "maxRate": "9.0", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "legTransferWhite": ["A-B:C", "D-E:F"], "type": 0}
+2019-05-10 09:44:01,666 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-10 09:46:13,362 - INFO - app.py - edit_rule - {"id": 63, "minRate": "0.0", "maxRate": "5.5", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-10 09:46:13,365 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-10 09:47:52,348 - INFO - app.py - edit_rule - {"id": 64, "minRate": "0.0", "maxRate": "5.2", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "type": 0}
+2019-05-10 09:47:52,350 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-10 10:52:59,140 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-10 10:53:00,575 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-10 10:53:01,549 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-10 10:53:02,478 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-10 10:53:03,473 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-10 10:53:11,936 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-10 10:54:22,864 - INFO - app.py - edit_rule - {"id": 65, "minRate": "0.0", "maxRate": "2", "maxFlightDistance": 0, "maxFlightTime": 0, "maxStopPoint": "0", "maxTransfer": "0", "maxTransferTime": "0", "maxStrideDays": 0, "banAllDays": 0, "legTransferWhite": ["A-B:C", "D-E:F"], "type": 0}
+2019-05-10 10:54:22,866 - INFO - app.py - edit_rule - 修改规则成功
+2019-05-27 14:33:14,924 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-27 14:52:46,879 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-27 14:59:01,542 - ERROR - app.py - dashboard - 连接数据库失败
+2019-05-27 15:14:08,813 - INFO - app.py - add_rule - {"type": 0, "maxTransferTime": "111", "banAllDays": 0}
+2019-05-27 15:14:08,814 - INFO - app.py - add_rule - 添加规则成功
