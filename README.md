@@ -1,3 +1,3 @@
 ## Installation
-pip install -r requirements.tex
+pip install -r requirements.txt
 python app.py
