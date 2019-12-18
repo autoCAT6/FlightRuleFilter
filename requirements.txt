@@ -2,3 +2,5 @@ requests
 flask
 wtforms
 passlib
+flask_mysqldb
+mysqlclient==1.4.5
